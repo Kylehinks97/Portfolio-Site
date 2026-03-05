@@ -15,4 +15,18 @@ class ProjectRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Project::class);
     }
+
+    /**
+     * @return list<Project>
+     */
+    public function findAllOrderedByCreatedAtDesc(): array
+    {
+        /** @var list<Project> $projects */
+        $projects = $this->createQueryBuilder('p')
+            ->orderBy('p.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+        return $projects;
+    }
 }
