@@ -1,0 +1,54 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: portfolio
+      POSTGRES_USER: portfolio
+      POSTGRES_PASSWORD: portfolio
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: .
+      target: php
+    environment:
+      APP_ENV: prod
+      APP_DEBUG: "0"
+      DATABASE_URL: "postgresql://portfolio:portfolio@postgres:5432/portfolio?serverVersion=17&charset=utf8"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    expose:
+      - "9000"
+
+  frontend:
+    build:
+      context: .
+      target: node
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+      HOSTNAME: "0.0.0.0"
+    expose:
+      - "3000"
+
+  nginx:
+    build:
+      context: .
+      target: nginx
+    depends_on:
+      - frontend
+      - api
+    ports:
+      - "8080:80"
+
+volumes:
+  postgres_data:
