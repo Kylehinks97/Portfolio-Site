@@ -1,6 +1,6 @@
 SHELL := /bin/sh
 
-.PHONY: up down restart rebuild help
+.PHONY: up down restart rebuild help frontend
 
 up: ## Start the containers
 	docker compose up -d
@@ -15,6 +15,9 @@ restart: ## Restart the containers
 rebuild: ## Rebuild the containers
 	docker compose build --no-cache
 	docker compose up -d --force-recreate
+
+frontend: ## Build frontend
+	cd frontend && bun run dev
 
 help: ## Display all commands
 	@echo ""
