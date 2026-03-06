@@ -10,6 +10,8 @@ final class ProjectResponse
         public string  $thumbnailPath,
         public ?string $videoPath,
         public string  $createdAt,
+        public int  $prideLevel,
+        public ?string  $link,
     ) {}
 
     /**
@@ -29,6 +31,8 @@ final class ProjectResponse
             'thumbnailPath' => $this->thumbnailPath,
             'videoPath' => $this->videoPath,
             'createdAt' => $this->createdAt,
+            'prideLevel' => $this->prideLevel,
+            'link' => $this->link,
         ];
     }
 }

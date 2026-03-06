@@ -26,6 +26,8 @@ final readonly class ProjectService
                 thumbnailPath: $project->getThumbnailPath(),
                 videoPath: $project->getVideoPath(),
                 createdAt: $project->getCreatedAt()->format(\DateTimeInterface::ATOM),
+                prideLevel: $project->getPrideLevel(),
+                link: $project->getLink(),
             ),
             $projects,
         );

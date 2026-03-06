@@ -32,6 +32,9 @@ class Project
     #[ORM\Column(type: Types::INTEGER)]
     private int $prideLevel;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $link = null;
+
     public function __construct()
     {
         $this->id = Uuid::v7();
@@ -111,6 +114,18 @@ class Project
     public function setPrideLevel(int $prideLevel): static
     {
         $this->prideLevel = $prideLevel;
+
+        return $this;
+    }
+
+    public function getLink(): ?string
+    {
+        return $this->link;
+    }
+
+    public function setLink(?string $link): static
+    {
+        $this->link = $link;
 
         return $this;
     }
