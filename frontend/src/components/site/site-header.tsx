@@ -1,15 +1,25 @@
- "use client";
+"use client";
 
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Menu } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CvDownloadDropdown } from "@/components/site/cv-download-dropdown";
 import { LocaleSwitcher } from "@/components/site/locale-switcher";
+import { MobileCvDownload } from "@/components/site/mobile-cv-download";
 import { Button } from "@/components/ui/button";
+import {
+  SheetHeader as MobileSheetHeader,
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import type { Locale } from "@/i18n/config";
 import type { Messages } from "@/i18n/messages";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 
 type SiteHeaderProps = {
   locale: Locale;
@@ -31,7 +41,6 @@ export function SiteHeader({ locale, messages }: SiteHeaderProps) {
       label: messages.nav.qualifications,
       exact: false,
     },
-    { href: `/${locale}/contact`, label: messages.nav.contact, exact: false },
   ];
 
   return (
@@ -41,13 +50,18 @@ export function SiteHeader({ locale, messages }: SiteHeaderProps) {
           className="inline-flex items-center gap-3 text-sm font-semibold tracking-[0.24em] uppercase"
           href={`/${locale}`}
         >
-          <span className="flex size-20 items-center justify-center overflow-hidden rounded-full border border-white/10 bg-white/8 text-base tracking-normal">
-            <Image src="/images/profile-pic.webp" width={100} height={100} alt="Profile of Kyle Hinks"/>
+          <span className="flex size-14 items-center justify-center overflow-hidden rounded-full border border-white/10 bg-white/8 text-base tracking-normal md:size-16 lg:size-20">
+            <Image
+              src="/images/profile-pic.webp"
+              width={100}
+              height={100}
+              alt="Profile of Kyle Hinks"
+            />
           </span>
-          <span className="hidden text-foreground/90 sm:inline">Kyle</span>
+          <span className="text-foreground/90">Kyle</span>
         </Link>
 
-        <nav className="hidden items-center gap-6 md:flex">
+        <nav className="hidden items-center gap-6 lg:flex">
           {navLinks.map((link) => {
             const linkPath = normalizePath(link.href);
             const isActive = link.exact
@@ -72,12 +86,12 @@ export function SiteHeader({ locale, messages }: SiteHeaderProps) {
           })}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="hidden items-center gap-3 lg:flex">
           <LocaleSwitcher
             currentLocale={locale}
             label={messages.common.language}
           />
-          <Button asChild className="hidden sm:inline-flex" size="lg">
+          <Button asChild size="lg">
             <Link href={`/${locale}/contact`}>
               {messages.nav.contact}
               <ArrowUpRight className="size-4" />
@@ -85,6 +99,69 @@ export function SiteHeader({ locale, messages }: SiteHeaderProps) {
           </Button>
           <CvDownloadDropdown locale={locale} messages={messages} />
         </div>
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button
+              aria-label="Open navigation menu"
+              className="lg:hidden"
+              size="icon"
+              type="button"
+              variant="secondary"
+            >
+              <Menu className="size-5" />
+            </Button>
+          </SheetTrigger>
+          <SheetContent className="lg:hidden">
+            <MobileSheetHeader className="pr-14">
+              <SheetTitle className="flex justify-between items-center"><strong>KYLE HINKS</strong></SheetTitle>
+            </MobileSheetHeader>
+            <div className="flex flex-1 flex-col gap-6 px-6 pb-6">
+              <nav className="flex flex-col gap-2">
+                {navLinks.map((link) => {
+                  const linkPath = normalizePath(link.href);
+                  const isActive = link.exact
+                    ? currentPath === linkPath
+                    : currentPath === linkPath ||
+                      currentPath.startsWith(`${linkPath}/`);
+
+                  return (
+                    <SheetClose asChild key={link.href}>
+                      <Link
+                        className={cn(
+                          "rounded-2xl px-4 py-3 text-base transition-colors",
+                          isActive
+                            ? "bg-primary text-primary-foreground"
+                            : "border border-white/10 bg-white/4 text-foreground/90 hover:bg-white/8",
+                        )}
+                        href={link.href}
+                      >
+                        {link.label}
+                      </Link>
+                    </SheetClose>
+                  );
+                })}
+              </nav>
+              <div className="flex flex-col gap-4">
+                <SheetClose asChild>
+                  <Button asChild className="w-full" size="lg">
+                    <Link href={`/${locale}/contact`}>
+                      {messages.nav.contact}
+                      <ArrowUpRight className="size-4" />
+                    </Link>
+                  </Button>
+                </SheetClose>
+                <MobileCvDownload locale={locale} messages={messages} />
+              </div>
+              <div className="flex justify-center items-center">
+                <LocaleSwitcher
+                    className="w-fit"
+                    currentLocale={locale}
+                    label={messages.common.language}
+                />
+              </div>
+            </div>
+          </SheetContent>
+        </Sheet>
       </div>
     </header>
   );
