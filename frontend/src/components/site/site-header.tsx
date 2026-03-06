@@ -1,8 +1,9 @@
  "use client";
 
-import { ArrowUpRight, DownloadIcon } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { CvDownloadDropdown } from "@/components/site/cv-download-dropdown";
 import { LocaleSwitcher } from "@/components/site/locale-switcher";
 import { Button } from "@/components/ui/button";
 import type { Locale } from "@/i18n/config";
@@ -82,12 +83,7 @@ export function SiteHeader({ locale, messages }: SiteHeaderProps) {
               <ArrowUpRight className="size-4" />
             </Link>
           </Button>
-          <Button asChild className="hidden sm:inline-flex" size="lg" variant="secondary">
-            <Link href={`/${locale}/download-cv`}>
-              {messages.nav.downloadCV}
-              <DownloadIcon className="size-4" />
-            </Link>
-          </Button>
+          <CvDownloadDropdown locale={locale} messages={messages} />
         </div>
       </div>
     </header>
