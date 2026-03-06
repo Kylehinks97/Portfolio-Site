@@ -2,14 +2,15 @@
 
 import { DownloadIcon } from "lucide-react";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import type { Locale } from "@/i18n/config";
 import type { Messages } from "@/i18n/messages";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 
 type CvDownloadDropdownProps = {
   locale: Locale;
   messages: Messages;
+  className?: string;
 };
 
 const cvFileByLanguage: Record<Locale, string> = {
@@ -17,7 +18,11 @@ const cvFileByLanguage: Record<Locale, string> = {
   es: "/CV/Kyle_Hinks_CV_espa%C3%B1ol.pdf",
 };
 
-export function CvDownloadDropdown({ locale, messages }: CvDownloadDropdownProps) {
+export function CvDownloadDropdown({
+  locale,
+  messages,
+  className,
+}: CvDownloadDropdownProps) {
   const [selectedCvLanguage, setSelectedCvLanguage] = useState<Locale>(
     locale === "es" ? "es" : "en",
   );
@@ -28,25 +33,33 @@ export function CvDownloadDropdown({ locale, messages }: CvDownloadDropdownProps
   ];
 
   const languageSelector = (groupName: string) => (
-    <div className="grid grid-cols-2 gap-2" role="radiogroup" aria-label={messages.nav.cvLanguagePrompt}>
+    <div
+      aria-label={messages.nav.cvLanguagePrompt}
+      className="grid grid-cols-2 gap-2"
+      role="radiogroup"
+    >
       {languageOptions.map((option) => {
         const isSelected = selectedCvLanguage === option.value;
         return (
-          <button
+          <label
             key={`${groupName}-${option.value}`}
-            aria-checked={isSelected}
             className={cn(
-              "rounded-xl border px-3 py-2 text-sm transition-colors",
+              "cursor-pointer rounded-xl border px-3 py-2 text-center text-sm transition-colors",
               isSelected
                 ? "border-primary bg-primary/20 text-foreground"
                 : "border-white/12 bg-white/4 text-muted-foreground hover:text-foreground",
             )}
-            onClick={() => setSelectedCvLanguage(option.value)}
-            role="radio"
-            type="button"
           >
-            {option.label}
-          </button>
+            <input
+              checked={isSelected}
+              className="sr-only"
+              name={groupName}
+              onChange={() => setSelectedCvLanguage(option.value)}
+              type="radio"
+              value={option.value}
+            />
+            <span>{option.label}</span>
+          </label>
         );
       })}
     </div>
@@ -54,7 +67,9 @@ export function CvDownloadDropdown({ locale, messages }: CvDownloadDropdownProps
 
   const panelContent = (
     <>
-      <p className="mb-2 text-xs text-muted-foreground">{messages.nav.cvLanguagePrompt}</p>
+      <p className="mb-2 text-xs text-muted-foreground">
+        {messages.nav.cvLanguagePrompt}
+      </p>
       {languageSelector("cv-language")}
       <Button asChild className="mt-3 w-full py-6">
         <a download href={cvFileByLanguage[selectedCvLanguage]}>
@@ -67,7 +82,7 @@ export function CvDownloadDropdown({ locale, messages }: CvDownloadDropdownProps
 
   return (
     <>
-      <div className="group relative hidden sm:block">
+      <div className={cn("group relative hidden sm:block", className)}>
         <Button
           aria-expanded="false"
           className="inline-flex"
@@ -84,7 +99,7 @@ export function CvDownloadDropdown({ locale, messages }: CvDownloadDropdownProps
           </div>
         </div>
       </div>
-      <details className="relative sm:hidden">
+      <details className={cn("relative sm:hidden", className)}>
         <summary className="list-none">
           <Button asChild size="lg" variant="secondary">
             <span>

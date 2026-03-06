@@ -8,9 +8,14 @@ import { cn } from "@/lib/utils";
 type LocaleSwitcherProps = {
   currentLocale: Locale;
   label: string;
+  className?: string;
 };
 
-export function LocaleSwitcher({ currentLocale, label }: LocaleSwitcherProps) {
+export function LocaleSwitcher({
+  currentLocale,
+  label,
+  className,
+}: LocaleSwitcherProps) {
   const pathname = usePathname();
   const segments = pathname.split("/").filter(Boolean);
   const restPath = segments.slice(1).join("/");
@@ -22,7 +27,7 @@ export function LocaleSwitcher({ currentLocale, label }: LocaleSwitcherProps) {
   };
 
   return (
-    <nav aria-label={label}>
+    <nav aria-label={label} className={className}>
       <Link
         href={nextTarget}
         aria-label={`Switch language to ${localeNames[nextLocale]}`}

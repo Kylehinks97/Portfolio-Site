@@ -29,7 +29,7 @@ export function SiteFooter({ locale, messages }: SiteFooterProps) {
   ];
 
   return (
-    <footer className="border-t border-white/8">
+    <footer className="hidden border-t border-white/8 lg:block">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-6 py-8 text-sm text-muted-foreground lg:flex-row lg:items-center lg:justify-between lg:px-10">
         <p>{messages.footer.line}</p>
         <div className="flex items-center gap-5">
