@@ -29,6 +29,9 @@ class Project
     #[ORM\Column]
     private \DateTimeImmutable $createdAt;
 
+    #[ORM\Column(type: Types::INTEGER)]
+    private int $prideLevel;
+
     public function __construct()
     {
         $this->id = Uuid::v7();
@@ -96,6 +99,18 @@ class Project
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getPrideLevel(): int
+    {
+        return $this->prideLevel;
+    }
+
+    public function setPrideLevel(int $prideLevel): static
+    {
+        $this->prideLevel = $prideLevel;
 
         return $this;
     }

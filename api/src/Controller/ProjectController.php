@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Dto\ProjectResponse;
 use App\Service\ProjectService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -19,7 +20,7 @@ final class ProjectController extends AbstractController
         $projects = $this->projectService->listProjects();
 
         return $this->json([
-            'data' => array_map(static fn ($p) => $p->toArray(), $projects),
+            'data' => array_map(static fn (ProjectResponse $projectResponse) => $projectResponse->toArray(), $projects),
         ]);
     }
 }

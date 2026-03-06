@@ -92,10 +92,15 @@ export type Messages = {
   projects: {
     title: string;
     description: string;
-    placeholderTitle: string;
-    placeholderDescription: string;
-    caseStudiesTitle: string;
-    caseStudiesDescription: string;
+    loadingTitle: string;
+    loadingDescription: string;
+    emptyTitle: string;
+    emptyDescription: string;
+    errorTitle: string;
+    errorDescription: string;
+    createdAtLabel: string;
+    thumbnailLabel: string;
+    videoLabel: string;
   };
   qualifications: {
     title: string;
@@ -239,12 +244,18 @@ const messages: Record<Locale, Messages> = {
       title: "My Projects",
       description:
         "Case studies and featured body of work demonstrating my experience and abilities. My professional work is of course sensitive and cannot be shown, but links to the sites and my explanations of my contributions are available.",
-      placeholderTitle: "Ready for your project library",
-      placeholderDescription:
-        "Curated project entries, screenshots, and writeups can slot into this layout later without changing the routing structure.",
-      caseStudiesTitle: "Ready for case studies",
-      caseStudiesDescription:
-        "Add featured work, metrics, technology stacks, and detailed before/after narratives when you are ready.",
+      loadingTitle: "Loading projects...",
+      loadingDescription:
+        "Fetching the latest projects from the API. This should only take a moment.",
+      emptyTitle: "No projects yet",
+      emptyDescription:
+        "The API responded successfully, but there are currently no project entries to display.",
+      errorTitle: "Could not load projects",
+      errorDescription:
+        "There was a problem reaching the projects API. Please try again in a moment.",
+      createdAtLabel: "Created",
+      thumbnailLabel: "Thumbnail",
+      videoLabel: "Video",
     },
     qualifications: {
       title: "Qualifications",
@@ -397,12 +408,18 @@ const messages: Record<Locale, Messages> = {
       title: "Mis Proyectos",
       description:
         "Casos de estudio y trabajo destacado que demuestran mi experiencia y habilidades. Mi trabajo profesional es sensible y no puedo mostrarlo, pero hay enlaces a los sitios y explicaciones de mis contribuciones.",
-      placeholderTitle: "Listo para tu biblioteca de proyectos",
-      placeholderDescription:
-        "Las entradas curadas, capturas y descripciones podrán integrarse después sin cambiar la estructura de rutas.",
-      caseStudiesTitle: "Listo para casos de estudio",
-      caseStudiesDescription:
-        "Añade trabajo destacado, métricas, stack tecnológico y narrativas detalladas de antes/después cuando quieras.",
+      loadingTitle: "Cargando proyectos...",
+      loadingDescription:
+        "Obteniendo los proyectos mas recientes desde la API. Deberia tardar solo un momento.",
+      emptyTitle: "Todavia no hay proyectos",
+      emptyDescription:
+        "La API respondio correctamente, pero ahora mismo no hay proyectos para mostrar.",
+      errorTitle: "No se pudieron cargar los proyectos",
+      errorDescription:
+        "Hubo un problema al conectar con la API de proyectos. Intentalo de nuevo en un momento.",
+      createdAtLabel: "Creado",
+      thumbnailLabel: "Miniatura",
+      videoLabel: "Video",
     },
     qualifications: {
       title: "Cualificaciones",
