@@ -1,9 +1,10 @@
-import { Layers3, Rocket } from "lucide-react";
+import { Ban, Heart } from "lucide-react";
 import { notFound } from "next/navigation";
 import { Reveal } from "@/components/site/reveal";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
+  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
@@ -11,11 +12,11 @@ import {
 import { isLocale } from "@/i18n/config";
 import { getMessages } from "@/i18n/messages";
 
-type ProjectsPageProps = {
+type AboutMePageProps = {
   params: Promise<{ locale: string }>;
 };
 
-export default async function ProjectsPage({ params }: ProjectsPageProps) {
+export default async function AboutMePage({ params }: AboutMePageProps) {
   const { locale } = await params;
 
   if (!isLocale(locale)) {
@@ -41,13 +42,23 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
           <Card className="min-h-72 border-white/10">
             <CardHeader>
               <div className="mb-3 flex size-12 items-center justify-center rounded-2xl border border-white/10 bg-white/8">
-                <Layers3 className="size-5 text-sky-200" />
+                <Heart className="size-5 text-emerald-200" />
               </div>
-              <CardTitle>{messages.projects.placeholderTitle}</CardTitle>
-              <CardDescription>
-                {messages.projects.placeholderDescription}
-              </CardDescription>
+              <CardTitle>{messages.aboutMe.likesTitle}</CardTitle>
+              <CardDescription />
             </CardHeader>
+            <CardContent>
+              <div className="flex flex-wrap gap-2">
+                {messages.aboutMe.like.map((item) => (
+                  <Badge
+                    key={item}
+                    className="border-emerald-300/25 bg-emerald-300/10 text-emerald-50 normal-case tracking-normal"
+                  >
+                    {item}
+                  </Badge>
+                ))}
+              </div>
+            </CardContent>
           </Card>
         </Reveal>
 
@@ -55,13 +66,23 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
           <Card className="min-h-72 border-white/10">
             <CardHeader>
               <div className="mb-3 flex size-12 items-center justify-center rounded-2xl border border-white/10 bg-white/8">
-                <Rocket className="size-5 text-fuchsia-200" />
+                <Ban className="size-5 text-rose-200" />
               </div>
-              <CardTitle>{messages.projects.caseStudiesTitle}</CardTitle>
-              <CardDescription>
-                {messages.projects.caseStudiesDescription}
-              </CardDescription>
+              <CardTitle>{messages.aboutMe.dislikesTitle}</CardTitle>
+              <CardDescription />
             </CardHeader>
+            <CardContent>
+              <div className="flex flex-wrap gap-2">
+                {messages.aboutMe.dislike.map((item) => (
+                  <Badge
+                    key={item}
+                    className="border-rose-300/25 bg-rose-300/10 text-rose-50 normal-case tracking-normal"
+                  >
+                    {item}
+                  </Badge>
+                ))}
+              </div>
+            </CardContent>
           </Card>
         </Reveal>
       </div>
