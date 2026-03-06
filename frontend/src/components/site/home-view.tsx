@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/card";
 import type { Locale } from "@/i18n/config";
 import type { Messages } from "@/i18n/messages";
+import {LogoMarquee} from "@/components/site/logo-marquee";
 
 type HomeViewProps = {
   locale: Locale;
@@ -148,6 +149,8 @@ export function HomeView({ locale, messages }: HomeViewProps) {
           </div>
         </div>
       </section>
+
+      <LogoMarquee />
 
       <section className="mx-auto w-full max-w-7xl px-6 py-8 lg:px-10">
         <Reveal className="space-y-4">
