@@ -58,9 +58,14 @@ export function HomeView({ locale, messages }: HomeViewProps) {
                 <h1 className="max-w-4xl text-5xl font-semibold tracking-tight text-balance sm:text-6xl lg:text-7xl">
                   <span className="text-gradient">{messages.title}</span>
                 </h1>
-                <p className="max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl">
-                  {messages.description}
-                </p>
+                {messages.description.map((desc) => (
+                    <p
+                        key={desc}
+                        className="max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl"
+                    >
+                      {desc}
+                    </p>
+                ))}
               </motion.div>
 
               <motion.div

@@ -40,7 +40,6 @@ export type Messages = {
     home: string;
     aboutMe: string;
     projects: string;
-    qualifications: string;
     contact: string;
     downloadCV: string;
     cvLanguagePrompt: string;
@@ -56,7 +55,7 @@ export type Messages = {
     availability: string;
     eyebrow: string;
     title: string;
-    description: string;
+    description: string[];
     primaryCta: string;
     secondaryCta: string;
     visualEyebrow: string;
@@ -75,10 +74,12 @@ export type Messages = {
     closingCta: string;
   };
   aboutMe: {
-    title: string,
-    description: string,
-    like: string[],
-    dislike: string[]
+    title: string;
+    description: string;
+    likesTitle: string;
+    dislikesTitle: string;
+    like: string[];
+    dislike: string[];
   };
   contact: {
     title: string;
@@ -102,14 +103,6 @@ export type Messages = {
     thumbnailLabel: string;
     videoLabel: string;
   };
-  qualifications: {
-    title: string;
-    description: string;
-    placeholderTitle: string;
-    placeholderDescription: string;
-    credibilityTitle: string;
-    credibilityDescription: string;
-  };
   footer: {
     line: string;
   };
@@ -126,7 +119,6 @@ const messages: Record<Locale, Messages> = {
       home: "Home",
       aboutMe: "About Me",
       projects: "Projects",
-      qualifications: "Qualifications",
       contact: "Contact",
       downloadCV: "Download My CV",
       cvLanguagePrompt: "Choose CV language",
@@ -145,7 +137,10 @@ const messages: Record<Locale, Messages> = {
       title:
         "I build polished digital experiences with sharp UX and scalable, performant backends.",
       description:
-        "🧑🏼‍💻 Bringing 3 years of fullstack experience to an exciting new remote or hybrid role. \n 📍 Based in Valladolid, Spain. A commutable distance from Madrid.",
+        [
+            "🧑🏼‍💻 Bringing 3 years of fullstack experience to an exciting new remote or hybrid role.",
+            "📍 Based in Valladolid, Spain. Commutable distance to Madrid."
+        ],
       primaryCta: "Explore projects",
       secondaryCta: "Contact me",
       visualEyebrow: "what i bring to the table",
@@ -210,6 +205,8 @@ const messages: Record<Locale, Messages> = {
     aboutMe: {
       title: 'About Me',
       description: 'It is hard to convey in this setting, but I believe myself to be a down-to-earth guy. I came to Spain after meeting my wife in England. We are expecting our first born in June, my ambition is to provide them the greatest life possible. Everything else about me is in the background to that.',
+      likesTitle: "I like",
+      dislikesTitle: "I avoid",
       like: ['Programming', 'Sports', 'Spanish culture', 'Croquetas'],
       dislike: ['Closed-minded people', 'Wasting time', 'Pessimists']
     },
@@ -257,19 +254,8 @@ const messages: Record<Locale, Messages> = {
       thumbnailLabel: "Thumbnail",
       videoLabel: "Video",
     },
-    qualifications: {
-      title: "Qualifications",
-      description:
-        "A list of certificates alluding to my skills up to and preceding my time in software engineering.",
-      placeholderTitle: "Ready for your background details",
-      placeholderDescription:
-        "This page is ready for certifications, tooling strengths, and technical specialties once you want to populate it.",
-      credibilityTitle: "Structured for credibility",
-      credibilityDescription:
-        "Add experience timelines, notable clients, education, or professional highlights without reworking the page shell.",
-    },
     footer: {
-      line: "Designed with motion, structure, and bilingual support in mind.",
+      line: "Portfolio by Kyle Hinks",
     },
   },
   es: {
@@ -282,7 +268,6 @@ const messages: Record<Locale, Messages> = {
       home: "Inicio",
       aboutMe: "Sobre mí",
       projects: "Proyectos",
-      qualifications: "Cualificaciones",
       contact: "Contacto",
       downloadCV: "Descargar mi CV",
       cvLanguagePrompt: "Elige el idioma del CV",
@@ -300,8 +285,10 @@ const messages: Record<Locale, Messages> = {
       eyebrow: "ingeniero fullstack • especialista en symfony • pro de react",
       title:
         "Construyo experiencias digitales pulidas con UX afilado y backends escalables y de alto rendimiento.",
-      description:
-        "🧑🏼‍💻 Aporto 3 años de experiencia fullstack a un nuevo rol remoto o híbrido emocionante. \n 📍 Vivo en Valladolid, España. A una distancia conmutable de Madrid.",
+      description: [
+        "🧑🏼‍💻 Aporto 3 años de experiencia fullstack a un nuevo rol remoto o híbrido emocionante.",
+        "📍 Vivo en Valladolid, España. A una distancia conmutable de Madrid.",
+      ],
       primaryCta: "Explorar proyectos",
       secondaryCta: "Contáctame",
       visualEyebrow: "lo que aporto",
@@ -374,6 +361,8 @@ const messages: Record<Locale, Messages> = {
       title: "Sobre mí",
       description:
         "Es difícil transmitirlo en este formato, pero me considero una persona con los pies en la tierra. Vine a España después de conocer a mi mujer en Inglaterra. Estamos esperando nuestro primer bebé en junio, y mi ambición es darle la mejor vida posible. Todo lo demás queda en segundo plano frente a eso.",
+      likesTitle: "Me gusta",
+      dislikesTitle: "No me gusta",
       like: ["Programación", "Deporte", "Cultura española", "Croquetas"],
       dislike: ["Gente de mente cerrada", "Perder el tiempo", "Pesimistas"],
     },
@@ -421,19 +410,8 @@ const messages: Record<Locale, Messages> = {
       thumbnailLabel: "Miniatura",
       videoLabel: "Video",
     },
-    qualifications: {
-      title: "Cualificaciones",
-      description:
-        "Una lista de certificados que aluden a mis habilidades hasta y antes de mi tiempo en ingeniería de software.",
-      placeholderTitle: "Listo para tus detalles de trayectoria",
-      placeholderDescription:
-        "Esta página está lista para certificaciones, puntos fuertes de herramientas y especialidades técnicas cuando quieras completarla.",
-      credibilityTitle: "Estructurado para generar credibilidad",
-      credibilityDescription:
-        "Añade cronologías de experiencia, clientes destacados, formación o logros profesionales sin rehacer la base de la página.",
-    },
     footer: {
-      line: "Diseñado con motion, estructura y soporte bilingüe desde el inicio.",
+      line: "Portafolio de Kyle Hinks",
     },
   },
 };
