@@ -18,6 +18,8 @@ const projectSchema = z
     thumbnailPath: z.string().min(1),
     videoPath: z.string().nullable(),
     createdAt: z.string().min(1),
+    prideLevel: z.number().int(),
+    link: z.string().min(1).nullable(),
   })
   .strict();
 
@@ -49,8 +51,12 @@ type ProjectsGridProps = {
 
 type FetchStatus = "loading" | "error" | "empty" | "success";
 
-function toAbsoluteUrl(baseUrl: string, path: string) {
+function resolveAssetUrl(baseUrl: string, path: string) {
   if (path.startsWith("http://") || path.startsWith("https://")) {
+    return path;
+  }
+
+  if (path.startsWith("/")) {
     return path;
   }
 
@@ -58,6 +64,34 @@ function toAbsoluteUrl(baseUrl: string, path: string) {
   const normalizedPath = path.replace(/^\/+/, "");
 
   return `${normalizedBase}/${normalizedPath}`;
+}
+
+function resolveVideoUrl(path: string) {
+  if (path.startsWith("http://") || path.startsWith("https://") || path.startsWith("/")) {
+    return path;
+  }
+
+  return `/videos/${path}`;
+}
+
+function resolveThumbnailUrl(path: string) {
+  if (path.startsWith("http://") || path.startsWith("https://") || path.startsWith("/")) {
+    return path;
+  }
+
+  return `/images/project/${path}`;
+}
+
+function getVideoMimeType(path: string) {
+  if (path.endsWith(".mp4")) {
+    return "video/mp4";
+  }
+
+  if (path.endsWith(".webm")) {
+    return "video/webm";
+  }
+
+  return undefined;
 }
 
 export function ProjectsGrid({ locale, apiBaseUrl, messages }: ProjectsGridProps) {
@@ -164,33 +198,50 @@ export function ProjectsGrid({ locale, apiBaseUrl, messages }: ProjectsGridProps
 
   return (
     <div className="mt-10 grid gap-6 lg:grid-cols-2">
-      {projects.map((project) => (
-        <Card key={`${project.title}-${project.createdAt}`} className="h-full border-white/10">
-          <CardHeader>
-            <CardTitle>{project.title}</CardTitle>
-            <CardDescription>{project.description}</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-2 text-sm text-muted-foreground">
-            {project.videoPath && <iframe className="w-full" title={project.title} src={project.videoPath}>
+      {projects.map((project) => {
+        const thumbnailUrl = resolveThumbnailUrl(project.thumbnailPath);
+        const videoUrl = project.videoPath ? resolveVideoUrl(project.videoPath) : null;
 
-            </iframe>}
-            <p>
-              {messages.createdAtLabel}: {dateFormatter.format(new Date(project.createdAt))}
-            </p>
-            <p>
-              {messages.thumbnailLabel}:{" "}
-              <a
-                className="text-sky-200 underline-offset-4 hover:underline"
-                href={toAbsoluteUrl(apiBaseUrl, project.thumbnailPath)}
-                rel="noreferrer"
-                target="_blank"
-              >
-                {project.thumbnailPath}
-              </a>
-            </p>
-          </CardContent>
-        </Card>
-      ))}
+        return (
+          <Card
+            key={`${project.title}-${project.createdAt}`}
+            className="h-full overflow-hidden border-white/10"
+          >
+            <div className="aspect-video w-full bg-black/40">
+              {videoUrl ? (
+                <video
+                  className="h-full w-full object-cover"
+                  controls
+                  playsInline
+                  poster={thumbnailUrl}
+                  preload="metadata"
+                >
+                  <source src={videoUrl} type={getVideoMimeType(videoUrl)} />
+                </video>
+              ) : (
+                <img
+                  alt={project.title}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                  src={thumbnailUrl}
+                />
+              )}
+            </div>
+            <CardHeader>
+              <CardTitle>
+                {project.link ? (
+                    <a href={project.link}>
+                      <p className="cursor-pointer hover:underline">{project.title}</p>
+                    </a>
+                ) : (
+                    <span className="cursor-default">{project.title}</span>
+                )}
+              </CardTitle>
+              <CardDescription>{project.description}</CardDescription>
+            </CardHeader>
+          </Card>
+        );
+      })}
     </div>
   );
 }
