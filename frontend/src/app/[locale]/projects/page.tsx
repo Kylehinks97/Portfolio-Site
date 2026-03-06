@@ -1,13 +1,7 @@
-import { Layers3, Rocket } from "lucide-react";
 import { notFound } from "next/navigation";
+import { ProjectsGrid } from "@/components/site/projects-grid";
 import { Reveal } from "@/components/site/reveal";
 import { Badge } from "@/components/ui/badge";
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { isLocale } from "@/i18n/config";
 import { getMessages } from "@/i18n/messages";
 
@@ -23,6 +17,8 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
   }
 
   const messages = getMessages(locale);
+  const apiBaseUrl =
+    process.env.NEXT_PUBLIC_SYMFONY_API_BASE_URL ?? "http://localhost:8000";
 
   return (
     <main className="mx-auto w-full max-w-7xl px-6 py-20 lg:px-10">
@@ -36,35 +32,23 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
         </p>
       </Reveal>
 
-      <div className="mt-10 grid gap-6 lg:grid-cols-2">
-        <Reveal delay={0.06}>
-          <Card className="min-h-72 border-white/10">
-            <CardHeader>
-              <div className="mb-3 flex size-12 items-center justify-center rounded-2xl border border-white/10 bg-white/8">
-                <Layers3 className="size-5 text-sky-200" />
-              </div>
-              <CardTitle>{messages.projects.placeholderTitle}</CardTitle>
-              <CardDescription>
-                {messages.projects.placeholderDescription}
-              </CardDescription>
-            </CardHeader>
-          </Card>
-        </Reveal>
-
-        <Reveal delay={0.12}>
-          <Card className="min-h-72 border-white/10">
-            <CardHeader>
-              <div className="mb-3 flex size-12 items-center justify-center rounded-2xl border border-white/10 bg-white/8">
-                <Rocket className="size-5 text-fuchsia-200" />
-              </div>
-              <CardTitle>{messages.projects.caseStudiesTitle}</CardTitle>
-              <CardDescription>
-                {messages.projects.caseStudiesDescription}
-              </CardDescription>
-            </CardHeader>
-          </Card>
-        </Reveal>
-      </div>
+      <Reveal delay={0.06}>
+        <ProjectsGrid
+          apiBaseUrl={apiBaseUrl}
+          locale={locale}
+          messages={{
+            loadingTitle: messages.projects.loadingTitle,
+            loadingDescription: messages.projects.loadingDescription,
+            emptyTitle: messages.projects.emptyTitle,
+            emptyDescription: messages.projects.emptyDescription,
+            errorTitle: messages.projects.errorTitle,
+            errorDescription: messages.projects.errorDescription,
+            createdAtLabel: messages.projects.createdAtLabel,
+            thumbnailLabel: messages.projects.thumbnailLabel,
+            videoLabel: messages.projects.videoLabel,
+          }}
+        />
+      </Reveal>
     </main>
   );
 }
