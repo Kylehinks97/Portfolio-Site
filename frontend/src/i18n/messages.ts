@@ -43,6 +43,10 @@ export type Messages = {
     qualifications: string;
     contact: string;
     downloadCV: string;
+    cvLanguagePrompt: string;
+    cvEnglishOption: string;
+    cvSpanishOption: string;
+    cvDownloadButton: string;
   };
   common: {
     underConstruction: string;
@@ -119,7 +123,11 @@ const messages: Record<Locale, Messages> = {
       projects: "Projects",
       qualifications: "Qualifications",
       contact: "Contact",
-      downloadCV: "Download My CV"
+      downloadCV: "Download My CV",
+      cvLanguagePrompt: "Choose CV language",
+      cvEnglishOption: "English",
+      cvSpanishOption: "Spanish",
+      cvDownloadButton: "Download CV",
     },
     common: {
       underConstruction:
@@ -266,6 +274,10 @@ const messages: Record<Locale, Messages> = {
       qualifications: "Cualificaciones",
       contact: "Contacto",
       downloadCV: "Descargar mi CV",
+      cvLanguagePrompt: "Elige el idioma del CV",
+      cvEnglishOption: "Inglés",
+      cvSpanishOption: "Español",
+      cvDownloadButton: "Descargar CV",
     },
     common: {
       underConstruction:
