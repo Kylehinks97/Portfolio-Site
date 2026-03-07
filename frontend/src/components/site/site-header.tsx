@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, Menu } from "lucide-react";
+import {ArrowUpRight, Mail, Menu} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -20,6 +20,7 @@ import {
 import type { Locale } from "@/i18n/config";
 import type { Messages } from "@/i18n/messages";
 import { cn } from "@/lib/utils";
+import ContactButton from "@/components/site/contact-button";
 
 type SiteHeaderProps = {
   locale: Locale;
@@ -36,11 +37,6 @@ export function SiteHeader({ locale, messages }: SiteHeaderProps) {
     { href: `/${locale}`, label: messages.nav.home, exact: true },
     { href: `/${locale}/about-me`, label: messages.nav.aboutMe, exact: false },
     { href: `/${locale}/projects`, label: messages.nav.projects, exact: false },
-    {
-      href: `/${locale}/qualifications`,
-      label: messages.nav.qualifications,
-      exact: false,
-    },
   ];
 
   return (
@@ -91,12 +87,7 @@ export function SiteHeader({ locale, messages }: SiteHeaderProps) {
             currentLocale={locale}
             label={messages.common.language}
           />
-          <Button asChild size="lg">
-            <Link href={`/${locale}/contact`}>
-              {messages.nav.contact}
-              <ArrowUpRight className="size-4" />
-            </Link>
-          </Button>
+          <ContactButton messages={messages} locale={locale} />
           <CvDownloadDropdown locale={locale} messages={messages} />
         </div>
         <Sheet>
