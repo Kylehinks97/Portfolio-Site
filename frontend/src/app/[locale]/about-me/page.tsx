@@ -28,7 +28,7 @@ export default async function AboutMePage({ params }: AboutMePageProps) {
   return (
     <main className="mx-auto w-full max-w-7xl px-6 py-20 lg:px-10">
       <Reveal className="max-w-3xl space-y-4">
-        <Badge>{messages.nav.aboutMe}</Badge>
+        <Badge className="badge-liquid liquid">{messages.nav.aboutMe}</Badge>
         <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
           {messages.aboutMe.title}
         </h1>
