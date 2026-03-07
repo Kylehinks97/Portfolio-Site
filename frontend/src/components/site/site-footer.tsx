@@ -5,6 +5,9 @@ import { usePathname } from "next/navigation";
 import type { Locale } from "@/i18n/config";
 import type { Messages } from "@/i18n/messages";
 import { cn } from "@/lib/utils";
+import {Button} from "@/components/ui/button";
+import {Mail} from "lucide-react";
+import ContactButton from "@/components/site/contact-button";
 
 type SiteFooterProps = {
   locale: Locale;
@@ -20,12 +23,6 @@ export function SiteFooter({ locale, messages }: SiteFooterProps) {
     { href: `/${locale}`, label: messages.nav.home, exact: true },
     { href: `/${locale}/about-me`, label: messages.nav.aboutMe, exact: false },
     { href: `/${locale}/projects`, label: messages.nav.projects, exact: false },
-    {
-      href: `/${locale}/qualifications`,
-      label: messages.nav.qualifications,
-      exact: false,
-    },
-    { href: `/${locale}/contact`, label: messages.nav.contact, exact: false },
   ];
 
   return (
@@ -46,7 +43,7 @@ export function SiteFooter({ locale, messages }: SiteFooterProps) {
                 className={cn(
                   "relative inline-flex rounded-full px-3 py-1.5 text-sm transition-all duration-200",
                   isActive
-                    ? "bg-primary !text-white hover:bg-primary/90 hover:shadow-[0_14px_45px_rgba(244,114,182,0.22)]"
+                    ? "bg-primary text-white! hover:bg-primary/90 hover:shadow-[0_14px_45px_rgba(244,114,182,0.22)]"
                     : "text-muted-foreground hover:text-foreground after:absolute after:right-3 after:bottom-1 after:left-3 after:h-px after:origin-left after:scale-x-0 after:bg-foreground after:transition-transform after:duration-300 hover:after:scale-x-100",
                 )}
                 href={link.href}
@@ -56,6 +53,7 @@ export function SiteFooter({ locale, messages }: SiteFooterProps) {
             );
           })}
         </div>
+        <ContactButton messages={messages} locale={locale} />
       </div>
     </footer>
   );
