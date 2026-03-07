@@ -28,6 +28,8 @@ final readonly class ProjectService
                 createdAt: $project->getCreatedAt()->format(\DateTimeInterface::ATOM),
                 prideLevel: $project->getPrideLevel(),
                 link: $project->getLink(),
+                isPersonal: $project->isPersonal(),
+                repo: $project->getRepo()
             ),
             $projects,
         );
