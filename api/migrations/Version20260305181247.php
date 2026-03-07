@@ -25,6 +25,9 @@ final class Version20260305181247 extends AbstractMigration
             video_path TEXT DEFAULT NULL,
             created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
             pride_level INT NOT NULL,
+            link VARCHAR(255) DEFAULT NULL,
+            is_personal BOOLEAN NOT NULL,
+            repo TEXT DEFAULT NULL,
             PRIMARY KEY (id)
         )
         SQL);

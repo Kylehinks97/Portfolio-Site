@@ -20,8 +20,8 @@ class Project
     #[ORM\Column(type: Types::TEXT)]
     private string $description;
 
-    #[ORM\Column(type: Types::TEXT)]
-    private string $thumbnailPath;
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $thumbnailPath = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $videoPath = null;
@@ -34,6 +34,12 @@ class Project
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $link = null;
+
+    #[ORM\Column]
+    private bool $isPersonal;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $repo = null;
 
     public function __construct()
     {
@@ -70,12 +76,12 @@ class Project
         return $this;
     }
 
-    public function getThumbnailPath(): string
+    public function getThumbnailPath(): ?string
     {
         return $this->thumbnailPath;
     }
 
-    public function setThumbnailPath(string $thumbnailPath): static
+    public function setThumbnailPath(?string $thumbnailPath): static
     {
         $this->thumbnailPath = $thumbnailPath;
 
@@ -128,5 +134,27 @@ class Project
         $this->link = $link;
 
         return $this;
+    }
+
+    public function isPersonal(): bool
+    {
+        return $this->isPersonal;
+    }
+
+    public function setIsPersonal(bool $isPersonal): static
+    {
+        $this->isPersonal = $isPersonal;
+
+        return $this;
+    }
+
+    public function getRepo(): ?string
+    {
+        return $this->repo;
+    }
+
+    public function setRepo(?string $hasRepo): void
+    {
+        $this->repo = $hasRepo;
     }
 }

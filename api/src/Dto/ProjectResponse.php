@@ -7,11 +7,13 @@ final class ProjectResponse
     public function __construct(
         public string  $title,
         public string  $description,
-        public string  $thumbnailPath,
+        public ?string  $thumbnailPath,
         public ?string $videoPath,
         public string  $createdAt,
         public int  $prideLevel,
         public ?string  $link,
+        public bool $isPersonal,
+        public ?string $repo
     ) {}
 
     /**
@@ -33,6 +35,8 @@ final class ProjectResponse
             'createdAt' => $this->createdAt,
             'prideLevel' => $this->prideLevel,
             'link' => $this->link,
+            'isPersonal' => $this->isPersonal,
+            'repo' => $this->repo,
         ];
     }
 }
