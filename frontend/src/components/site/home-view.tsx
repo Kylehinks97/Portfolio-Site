@@ -43,7 +43,7 @@ export function HomeView({ locale, messages }: HomeViewProps) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7 }}
               >
-                <Badge variant="accent">{messages.availability}</Badge>
+                <Badge className="badge-liquid liquid">{messages.availability}</Badge>
               </motion.div>
 
               <motion.div
@@ -94,7 +94,7 @@ export function HomeView({ locale, messages }: HomeViewProps) {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ delay: 0.18, duration: 0.9 }}
             >
-              <Card className="relative overflow-hidden border-white/12 p-8">
+              <Card className="relative overflow-hidden border-white/12 p-8 card-glow">
                 <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
                 <div className="grid gap-6">
                   <div className="flex items-start justify-between gap-4">
@@ -115,7 +115,7 @@ export function HomeView({ locale, messages }: HomeViewProps) {
                     {messages.stats.map((item) => (
                       <motion.div
                         key={item.label}
-                        className="rounded-[24px] border border-white/10 bg-white/6 p-5"
+                        className="rounded-[24px] project-card border border-white/10 bg-white/6 p-5"
                         transition={{
                           type: "spring",
                           stiffness: 240,
@@ -132,7 +132,7 @@ export function HomeView({ locale, messages }: HomeViewProps) {
                       </motion.div>
                     ))}
                     <motion.div
-                      className="rounded-[24px] border border-fuchsia-300/20 bg-fuchsia-300/10 p-5 sm:col-span-2"
+                      className="rounded-[24px] project-card border border-fuchsia-300/20 bg-fuchsia-300/10 p-5 sm:col-span-2"
                       transition={{
                         type: "spring",
                         stiffness: 240,
@@ -159,7 +159,7 @@ export function HomeView({ locale, messages }: HomeViewProps) {
 
       <section className="mx-auto w-full max-w-7xl px-6 py-8 lg:px-10">
         <Reveal className="space-y-4">
-          <Badge>{messages.featureTitle}</Badge>
+          <Badge className="badge-liquid liquid">{messages.featureTitle}</Badge>
           <div className="max-w-3xl space-y-3">
             <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
               {messages.featureTitle}
@@ -177,7 +177,7 @@ export function HomeView({ locale, messages }: HomeViewProps) {
             return (
               <Reveal key={feature.title} delay={index * 0.08}>
                 <motion.div whileHover={{ y: -8 }}>
-                  <Card className="h-full border-white/10">
+                  <Card className="card-shiny h-full border-white/10">
                     <CardHeader>
                       <div className="mb-2 flex size-12 items-center justify-center rounded-2xl border border-white/12 bg-white/8">
                         <Icon className="size-5 text-sky-200" />
@@ -195,7 +195,7 @@ export function HomeView({ locale, messages }: HomeViewProps) {
 
       <section className="mx-auto w-full max-w-7xl px-6 py-20 lg:px-10">
         <Reveal className="max-w-3xl space-y-3">
-          <Badge>{messages.processTitle}</Badge>
+          <Badge className="badge-liquid liquid">{messages.processTitle}</Badge>
           <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
             {messages.processTitle}
           </h2>
@@ -208,7 +208,7 @@ export function HomeView({ locale, messages }: HomeViewProps) {
           {messages.process.map((item, index) => (
             <Reveal key={item.step} delay={index * 0.08}>
               <motion.div whileHover={{ y: -8 }}>
-                <Card className="h-full border-white/10">
+                <Card className="card-shiny h-full border-white/10">
                   <CardHeader>
                     <p className="text-sm tracking-[0.22em] text-fuchsia-200 uppercase">
                       {item.step}
@@ -229,7 +229,7 @@ export function HomeView({ locale, messages }: HomeViewProps) {
 
       <section className="mx-auto w-full max-w-7xl px-6 pb-20 lg:px-10">
         <Reveal>
-          <Card className="relative overflow-hidden border-white/12 px-6 py-8 sm:px-10 sm:py-10">
+          <Card className="relative overflow-hidden border-white/12 px-6 py-8 sm:px-10 sm:py-10 project-card">
             <div className="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-sky-400/10 to-transparent blur-3xl" />
             <div className="relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
               <div className="max-w-2xl space-y-3">
