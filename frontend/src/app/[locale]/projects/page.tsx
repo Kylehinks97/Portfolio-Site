@@ -4,6 +4,7 @@ import { Reveal } from "@/components/site/reveal";
 import { Badge } from "@/components/ui/badge";
 import { isLocale } from "@/i18n/config";
 import { getMessages } from "@/i18n/messages";
+import { envConfig } from "@/envConfig";
 
 type ProjectsPageProps = {
   params: Promise<{ locale: string }>;
@@ -17,13 +18,12 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
   }
 
   const messages = getMessages(locale);
-  const apiBaseUrl =
-    process.env.NEXT_PUBLIC_SYMFONY_API_BASE_URL ?? "http://localhost:8000";
+  const apiBaseUrl = envConfig.symfonyApiBaseUrl;
 
   return (
     <main className="mx-auto w-full max-w-7xl px-6 py-20 lg:px-10">
       <Reveal className="max-w-3xl space-y-4">
-        <Badge>{messages.nav.projects}</Badge>
+        <Badge className="badge-liquid liquid">{messages.nav.projects}</Badge>
         <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
           {messages.projects.title}
         </h1>
@@ -36,17 +36,7 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
         <ProjectsGrid
           apiBaseUrl={apiBaseUrl}
           locale={locale}
-          messages={{
-            loadingTitle: messages.projects.loadingTitle,
-            loadingDescription: messages.projects.loadingDescription,
-            emptyTitle: messages.projects.emptyTitle,
-            emptyDescription: messages.projects.emptyDescription,
-            errorTitle: messages.projects.errorTitle,
-            errorDescription: messages.projects.errorDescription,
-            createdAtLabel: messages.projects.createdAtLabel,
-            thumbnailLabel: messages.projects.thumbnailLabel,
-            videoLabel: messages.projects.videoLabel,
-          }}
+          messages={messages.projects}
         />
       </Reveal>
     </main>

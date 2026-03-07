@@ -29,7 +29,7 @@ export default async function ContactPage({ params }: ContactPageProps) {
     <main className="mx-auto w-full max-w-7xl px-6 py-20 lg:px-10">
       <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
         <Reveal className="space-y-6">
-          <Badge>{messages.nav.contact}</Badge>
+          <Badge className="badge-liquid liquid">{messages.nav.contact}</Badge>
           <div className="space-y-4">
             <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
               {messages.contact.title}
