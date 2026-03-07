@@ -102,6 +102,8 @@ export type Messages = {
     createdAtLabel: string;
     thumbnailLabel: string;
     videoLabel: string;
+    isPersonal: string;
+    isProfessional: string
   };
   footer: {
     line: string;
@@ -253,6 +255,8 @@ const messages: Record<Locale, Messages> = {
       createdAtLabel: "Created",
       thumbnailLabel: "Thumbnail",
       videoLabel: "Video",
+      isPersonal: "PERSONAL",
+      isProfessional: "PROFESSIONAL",
     },
     footer: {
       line: "Portfolio by Kyle Hinks",
@@ -409,6 +413,8 @@ const messages: Record<Locale, Messages> = {
       createdAtLabel: "Creado",
       thumbnailLabel: "Miniatura",
       videoLabel: "Video",
+      isPersonal: "PERSONAL",
+      isProfessional: "PROFESIONAL",
     },
     footer: {
       line: "Portafolio de Kyle Hinks",
