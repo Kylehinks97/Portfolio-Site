@@ -52,9 +52,10 @@ export function SiteHeader({ locale, messages }: SiteHeaderProps) {
               width={100}
               height={100}
               alt="Profile of Kyle Hinks"
+              loading="eager"
             />
           </span>
-          <span className="text-foreground/90">Kyle</span>
+          <span className="text-foreground/90">Kyle Hinks</span>
         </Link>
 
         <nav className="hidden items-center gap-6 lg:flex">
