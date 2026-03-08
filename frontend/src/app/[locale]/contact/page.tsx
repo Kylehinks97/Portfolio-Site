@@ -40,7 +40,7 @@ export default async function ContactPage({ params }: ContactPageProps) {
           </div>
 
           <div className="grid gap-4">
-            <Card className="border-white/10">
+            <Card className="border-white/10 card-shiny">
               <CardHeader>
                 <div className="mb-2 flex size-11 items-center justify-center rounded-2xl border border-white/10 bg-white/8">
                   <MessageSquareMore className="size-5 text-sky-200" />
@@ -52,7 +52,7 @@ export default async function ContactPage({ params }: ContactPageProps) {
               </CardHeader>
             </Card>
 
-            <Card className="border-white/10">
+            <Card className="border-white/10 card-shiny">
               <CardHeader>
                 <div className="mb-2 flex size-11 items-center justify-center rounded-2xl border border-white/10 bg-white/8">
                   <Mail className="size-5 text-fuchsia-200" />
