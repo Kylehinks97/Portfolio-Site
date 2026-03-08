@@ -1,32 +1,34 @@
 "use client";
 
 import axios from "axios";
-import { useEffect, useMemo, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { CiGlobe } from "react-icons/ci";
+import { FaGithub } from "react-icons/fa";
 import { z } from "zod";
+import { Badge } from "@/components/ui/badge";
 import {
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {Badge} from "@/components/ui/badge";
-import {FaGithub} from "react-icons/fa";
-import {CiGlobe} from "react-icons/ci";
-import Link from "next/link";
+import type { Locale } from "@/i18n/config";
 import fallbackProjectsJson from "../../../projects-fallback.json";
 
 const projectSchema = z
   .object({
     title: z.string().min(1),
-    description: z.string().min(1),
+    descriptionEnglish: z.string().min(1),
+    descriptionSpanish: z.string().min(1),
     thumbnailPath: z.string().nullable(),
     videoPath: z.string().nullable(),
     createdAt: z.string().min(1),
     prideLevel: z.number().int(),
     link: z.string().min(1).nullable(),
     isPersonal: z.boolean(),
-    repo: z.string().nullable()
+    repo: z.string().nullable(),
   })
   .strict();
 
@@ -49,11 +51,11 @@ type ProjectsGridMessages = {
   thumbnailLabel: string;
   videoLabel: string;
   isPersonal: string;
-  isProfessional: string
+  isProfessional: string;
 };
 
 type ProjectsGridProps = {
-  locale: string;
+  locale: Locale;
   apiBaseUrl: string;
   messages: ProjectsGridMessages;
 };
@@ -61,7 +63,11 @@ type ProjectsGridProps = {
 type FetchStatus = "loading" | "error" | "empty" | "success";
 
 function resolveVideoUrl(path: string) {
-  if (path.startsWith("http://") || path.startsWith("https://") || path.startsWith("/")) {
+  if (
+    path.startsWith("http://") ||
+    path.startsWith("https://") ||
+    path.startsWith("/")
+  ) {
     return path;
   }
 
@@ -73,7 +79,11 @@ function resolveThumbnailUrl(path: string | null) {
     return;
   }
 
-  if (path.startsWith("http://") || path.startsWith("https://") || path.startsWith("/")) {
+  if (
+    path.startsWith("http://") ||
+    path.startsWith("https://") ||
+    path.startsWith("/")
+  ) {
     return path;
   }
 
@@ -92,7 +102,17 @@ function getVideoMimeType(path: string) {
   return undefined;
 }
 
-export function ProjectsGrid({ apiBaseUrl, messages }: ProjectsGridProps) {
+function getProjectDescription(project: Project, locale: Locale) {
+  return locale === "es"
+    ? project.descriptionSpanish
+    : project.descriptionEnglish;
+}
+
+export function ProjectsGrid({
+  apiBaseUrl,
+  locale,
+  messages,
+}: ProjectsGridProps) {
   const [projects, setProjects] = useState<Project[]>([]);
   const [status, setStatus] = useState<FetchStatus>("loading");
 
@@ -100,37 +120,39 @@ export function ProjectsGrid({ apiBaseUrl, messages }: ProjectsGridProps) {
     const controller = new AbortController();
     const trimmedApiBaseUrl = apiBaseUrl.trim();
 
-    const fallbackProjects = projectsResponseSchema
-      .shape.data
-      .safeParse((fallbackProjectsJson as unknown as { data?: unknown }).data)
-      .success
+    const fallbackProjects = projectsResponseSchema.shape.data.safeParse(
+      (fallbackProjectsJson as unknown as { data?: unknown }).data,
+    ).success
       ? (fallbackProjectsJson as unknown as { data: Project[] }).data
       : [];
 
-    const useFallback = () => {
+    const applyFallback = () => {
       setProjects(fallbackProjects);
       setStatus(fallbackProjects.length === 0 ? "empty" : "success");
     };
 
     if (!trimmedApiBaseUrl) {
-      useFallback();
+      applyFallback();
       return () => controller.abort();
     }
 
     const loadProjects = async () => {
       try {
-        const response = await axios.get(`${trimmedApiBaseUrl.replace(/\/+$/, "")}/projects`, {
-          headers: {
-            Accept: "application/json",
+        const response = await axios.get(
+          `${trimmedApiBaseUrl.replace(/\/+$/, "")}/projects`,
+          {
+            headers: {
+              Accept: "application/json",
+            },
+            timeout: 10_000,
+            signal: controller.signal,
           },
-          timeout: 10_000,
-          signal: controller.signal,
-        });
+        );
 
         const parsed = projectsResponseSchema.safeParse(response.data);
 
         if (!parsed.success) {
-          useFallback();
+          applyFallback();
           return;
         }
 
@@ -141,7 +163,7 @@ export function ProjectsGrid({ apiBaseUrl, messages }: ProjectsGridProps) {
           return;
         }
 
-        useFallback();
+        applyFallback();
       }
     };
 
@@ -180,14 +202,16 @@ export function ProjectsGrid({ apiBaseUrl, messages }: ProjectsGridProps) {
     <div className="mt-10 grid gap-6 lg:grid-cols-2">
       {projects.map((project) => {
         const thumbnailUrl = resolveThumbnailUrl(project?.thumbnailPath);
-        const videoUrl = project.videoPath ? resolveVideoUrl(project.videoPath) : null;
+        const videoUrl = project.videoPath
+          ? resolveVideoUrl(project.videoPath)
+          : null;
 
         return (
           <Card
             key={`${project.title}-${project.createdAt}`}
             className="project-card h-full overflow-hidden border-white/10"
           >
-            <div className="aspect-video w-full bg-black/40">
+            <div className="relative aspect-video w-full bg-black/40">
               {videoUrl ? (
                 <video
                   className="h-full w-full object-cover"
@@ -197,14 +221,28 @@ export function ProjectsGrid({ apiBaseUrl, messages }: ProjectsGridProps) {
                   preload="metadata"
                 >
                   <source src={videoUrl} type={getVideoMimeType(videoUrl)} />
+                  <track
+                    default={locale === "es"}
+                    kind="captions"
+                    label={
+                      locale === "es" ? "Spanish captions" : "English captions"
+                    }
+                    src="/videos/project-captions.vtt"
+                    srcLang={locale}
+                  />
                 </video>
               ) : (
-                <img
-                  alt={project.title}
-                  className="h-full w-full object-cover"
-                  loading="lazy"
-                  src={thumbnailUrl}
-                />
+                thumbnailUrl && (
+                  <Image
+                    alt={project.title}
+                    className="object-cover"
+                    fill
+                    loading="lazy"
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    src={thumbnailUrl}
+                    unoptimized
+                  />
+                )
               )}
             </div>
             <CardHeader>
@@ -212,40 +250,49 @@ export function ProjectsGrid({ apiBaseUrl, messages }: ProjectsGridProps) {
                 <div className="w-full flex justify-between items-center">
                   <div>
                     {project.link ? (
-                      <a href={project.link} className="cursor-pointer hover:underline">
+                      <a
+                        href={project.link}
+                        className="cursor-pointer hover:underline"
+                      >
                         {project.title}
                       </a>
                     ) : (
                       <span className="cursor-default">{project.title}</span>
-                     )}
-                  </div>
-                  <div className="flex justify-center items-center gap-x-4">
-                    {project.link && (
-                        <Link
-                            target="_blank"
-                            href={project.link}
-                            className="card-link card-link-globe"
-                        >
-                          <CiGlobe />
-                        </Link>
                     )}
-                    {project.repo && (
-                        <Link
-                            target="_blank"
-                            href={project.repo}
-                            className="card-link card-link-github"
-                        >
-                          <FaGithub />
-                        </Link>
-                    )}
-                    <Badge className="animated-badge">
-                      {project.isPersonal ? messages.isPersonal : messages.isProfessional}
-                    </Badge>
                   </div>
                 </div>
               </CardTitle>
-              <CardDescription>{project.description}</CardDescription>
+              <CardDescription>
+                {getProjectDescription(project, locale)}
+              </CardDescription>
             </CardHeader>
+            <div className="flex justify-between mx-6 items-center gap-x-4 mb-6">
+              <Badge className="animated-badge">
+                {project.isPersonal
+                    ? messages.isPersonal
+                    : messages.isProfessional}
+              </Badge>
+              {project.link && (
+                  <Link
+                      target="_blank"
+                      href={project.link}
+                      className="card-link card-link-globe border-2 border-border rounded gap-x-2"
+                  >
+                    <p className="text-sm">Visit</p>
+                    <CiGlobe />
+                  </Link>
+              )}
+              {project.repo && (
+                  <Link
+                      target="_blank"
+                      href={project.repo}
+                      className="card-link card-link-github border-2 border-border rounded gap-x-2"
+                  >
+                    <p className="text-sm">Visit</p>
+                    <FaGithub />
+                  </Link>
+              )}
+            </div>
           </Card>
         );
       })}

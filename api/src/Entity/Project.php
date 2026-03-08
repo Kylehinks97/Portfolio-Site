@@ -18,7 +18,10 @@ class Project
     private string $title;
 
     #[ORM\Column(type: Types::TEXT)]
-    private string $description;
+    private string $descriptionEnglish;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private string $descriptionSpanish;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $thumbnailPath = null;
@@ -64,14 +67,26 @@ class Project
         return $this;
     }
 
-    public function getDescription(): string
+    public function getDescriptionEnglish(): string
     {
-        return $this->description;
+        return $this->descriptionEnglish;
     }
 
-    public function setDescription(string $description): static
+    public function setDescriptionEnglish(string $description): static
     {
-        $this->description = $description;
+        $this->descriptionEnglish = $description;
+
+        return $this;
+    }
+
+    public function getDescriptionSpanish(): string
+    {
+        return $this->descriptionSpanish;
+    }
+
+    public function setDescriptionSpanish(string $description): static
+    {
+        $this->descriptionSpanish = $description;
 
         return $this;
     }

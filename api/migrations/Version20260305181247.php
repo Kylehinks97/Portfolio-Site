@@ -20,7 +20,8 @@ final class Version20260305181247 extends AbstractMigration
         CREATE TABLE project (
             id UUID NOT NULL,
             title TEXT NOT NULL,
-            description TEXT NOT NULL,
+            description_english TEXT NOT NULL,
+            description_spanish TEXT NOT NULL,
             thumbnail_path TEXT DEFAULT NULL,
             video_path TEXT DEFAULT NULL,
             created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
