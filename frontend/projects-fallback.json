@@ -1,0 +1,48 @@
+{
+  "data": [
+    {
+      "title":"Conjugator",
+      "description":"Conjugator",
+      "thumbnailPath":"conjugator.png",
+      "videoPath":null,
+      "createdAt":"2026-03-07T23:22:04+00:00",
+      "prideLevel":3,
+      "link":"https:\/\/kyle-hinks-conjugator.netlify.app\/",
+      "isPersonal":true,
+      "repo":null
+    },
+    {
+      "title":"Club Swap",
+      "description":"Club Swap",
+      "thumbnailPath":"club-swap.png",
+      "videoPath":null,
+      "createdAt":"2026-03-07T20:59:22+00:00",
+      "prideLevel":4,
+      "link":"https:\/\/clubswap-9ac6f983a2f6.herokuapp.com\/",
+      "isPersonal":true,
+      "repo":null
+    },
+    {
+      "title":"Mesure",
+      "description":"Mesure",
+      "thumbnailPath":null,
+      "videoPath":"mesure_demo.mp4",
+      "createdAt":"2026-03-07T20:59:03+00:00",
+      "prideLevel":1,
+      "link":null,
+      "isPersonal":true,
+      "repo":"https:\/\/github.com\/Kylehinks97\/mesure"
+    },
+    {
+      "title":"Custodio Digital",
+      "description":"Custodio Digital",
+      "thumbnailPath":"custodio.png",
+      "videoPath":null,
+      "createdAt":"2026-03-07T20:58:02+00:00",
+      "prideLevel":3,
+      "link":"https:\/\/custodio.digital\/es",
+      "isPersonal":false,
+      "repo":null
+    }
+  ]
+}

@@ -14,6 +14,7 @@ import {Badge} from "@/components/ui/badge";
 import {FaGithub} from "react-icons/fa";
 import {CiGlobe} from "react-icons/ci";
 import Link from "next/link";
+import fallbackProjectsJson from "../../../projects-fallback.json";
 
 const projectSchema = z
   .object({
@@ -94,19 +95,27 @@ function getVideoMimeType(path: string) {
 export function ProjectsGrid({ apiBaseUrl, messages }: ProjectsGridProps) {
   const [projects, setProjects] = useState<Project[]>([]);
   const [status, setStatus] = useState<FetchStatus>("loading");
-  const [hasConfigError, setHasConfigError] = useState(false);
 
   useEffect(() => {
     const controller = new AbortController();
     const trimmedApiBaseUrl = apiBaseUrl.trim();
 
+    const fallbackProjects = projectsResponseSchema
+      .shape.data
+      .safeParse((fallbackProjectsJson as unknown as { data?: unknown }).data)
+      .success
+      ? (fallbackProjectsJson as unknown as { data: Project[] }).data
+      : [];
+
+    const useFallback = () => {
+      setProjects(fallbackProjects);
+      setStatus(fallbackProjects.length === 0 ? "empty" : "success");
+    };
+
     if (!trimmedApiBaseUrl) {
-      setHasConfigError(true);
-      setStatus("error");
+      useFallback();
       return () => controller.abort();
     }
-
-    setHasConfigError(false);
 
     const loadProjects = async () => {
       try {
@@ -121,19 +130,18 @@ export function ProjectsGrid({ apiBaseUrl, messages }: ProjectsGridProps) {
         const parsed = projectsResponseSchema.safeParse(response.data);
 
         if (!parsed.success) {
-          setStatus("error");
+          useFallback();
           return;
         }
 
         setProjects(parsed.data.data);
         setStatus(parsed.data.data.length === 0 ? "empty" : "success");
       } catch (error) {
-        console.error(error)
         if (axios.isCancel(error)) {
           return;
         }
 
-        setStatus("error");
+        useFallback();
       }
     };
 
@@ -149,24 +157,6 @@ export function ProjectsGrid({ apiBaseUrl, messages }: ProjectsGridProps) {
           <CardHeader>
             <CardTitle>{messages.loadingTitle}</CardTitle>
             <CardDescription>{messages.loadingDescription}</CardDescription>
-          </CardHeader>
-        </Card>
-      </div>
-    );
-  }
-
-  if (status === "error") {
-    return (
-      <div className="mt-10">
-        <Card className="min-h-48 border-red-400/30">
-          <CardHeader>
-            <CardTitle>{messages.errorTitle}</CardTitle>
-            <CardDescription>
-              {messages.errorDescription}
-              {hasConfigError
-                ? ` Set NEXT_PUBLIC_SYMFONY_API_BASE_URL in your frontend environment.`
-                : null}
-            </CardDescription>
           </CardHeader>
         </Card>
       </div>
