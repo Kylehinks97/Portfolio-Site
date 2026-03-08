@@ -1,16 +1,15 @@
 SHELL := /bin/sh
 
-.PHONY: up down restart rebuild help frontend
+.PHONY: up down restart rebuild help api frontend
 
 up: ## Start the containers
 	docker compose up -d
 
 down: ## Stop the containers
-	docker compose down
+	docker compose down --remove-orphans
 
 restart: ## Restart the containers
-	docker compose down
-	docker compose up -d
+	make down && make up
 
 rebuild: ## Rebuild the containers
 	docker compose build --no-cache
