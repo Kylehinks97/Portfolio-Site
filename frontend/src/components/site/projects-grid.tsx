@@ -67,7 +67,7 @@ function resolveVideoUrl(path: string) {
   return `/videos/${path}`;
 }
 
-function resolveThumbnailUrl(path: string) {
+function resolveThumbnailUrl(path: string | null) {
   if (null === path) {
     return;
   }
