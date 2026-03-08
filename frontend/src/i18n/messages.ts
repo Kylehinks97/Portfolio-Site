@@ -25,7 +25,7 @@ type ContactFormMessages = {
   error: string;
   placeholders: {
     name: string;
-    email: string;
+    yourEmail: string;
     company: string;
     message: string;
   };
@@ -221,19 +221,19 @@ const messages: Record<Locale, Messages> = {
         "Remote and hybrid roles within a commutable distance to Valladolid, Spain.",
       responseTitle: "Response time",
       responseDescription:
-        "Usually within 1-2 business days once the final submission flow is connected.",
+        "Usually within 1-2 business days.",
       form: {
         name: "Name",
-        email: "Email",
+        email: "Your email",
         company: "Company",
-        message: "Project details",
+        message: "Message",
         submit: "Send inquiry",
         sending: "Sending...",
-        success: "Your message was validated and staged successfully.",
-        error: "Please fix the highlighted fields and try again.",
+        success: "Your message has been sent successfully.",
+        error: "There was a problem sending your message. Please try again.",
         placeholders: {
           name: "Jane Smith",
-          email: "jane@company.com",
+          yourEmail: "jane@company.com",
           company: "Studio or company name",
           message: "Tell me about the project, timeline, and goals.",
         },
@@ -379,19 +379,19 @@ const messages: Record<Locale, Messages> = {
         "Roles remotos e híbridos a una distancia conmutable de Valladolid, España.",
       responseTitle: "Tiempo de respuesta",
       responseDescription:
-        "Normalmente en 1-2 días hábiles una vez que esté conectado el flujo final de envío.",
+        "Normalmente en 1-2 días hábiles.",
       form: {
         name: "Nombre",
-        email: "Correo",
+        email: "Tu correo",
         company: "Empresa",
-        message: "Detalles del proyecto",
+        message: "Message",
         submit: "Enviar consulta",
         sending: "Enviando...",
-        success: "Tu mensaje fue validado y preparado correctamente.",
-        error: "Por favor, corrige los campos marcados e inténtalo de nuevo.",
+        success: "Tu mensaje se ha enviado correctamente.",
+        error: "Hubo un problema al enviar tu mensaje. Inténtalo de nuevo.",
         placeholders: {
-          name: "Jane Smith",
-          email: "jane@company.com",
+          name: "Maria Delgado",
+          yourEmail: "maria@company.com",
           company: "Nombre del estudio o empresa",
           message: "Cuéntame sobre el proyecto, plazos y objetivos.",
         },

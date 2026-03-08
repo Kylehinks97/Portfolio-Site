@@ -57,7 +57,10 @@ export function ContactForm({ messages }: ContactFormProps) {
         });
       });
 
-      setServerMessage({ kind: "error", text: messages.error });
+      setServerMessage({
+        kind: "error",
+        text: result.message ?? messages.error,
+      });
     });
   };
 
@@ -91,7 +94,7 @@ export function ContactForm({ messages }: ContactFormProps) {
               </label>
               <Input
                 id="email"
-                placeholder={messages.placeholders.email}
+                placeholder={messages.placeholders.yourEmail}
                 type="email"
                 {...form.register("email")}
               />
@@ -148,7 +151,7 @@ export function ContactForm({ messages }: ContactFormProps) {
           ) : null}
 
           <Button
-            className="w-full sm:w-auto"
+            className="w-full sm:w-auto text-white"
             disabled={isPending}
             type="submit"
           >
