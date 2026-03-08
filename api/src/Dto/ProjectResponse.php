@@ -6,7 +6,8 @@ final class ProjectResponse
 {
     public function __construct(
         public string  $title,
-        public string  $description,
+        public string  $descriptionEnglish,
+        public string  $descriptionSpanish,
         public ?string  $thumbnailPath,
         public ?string $videoPath,
         public string  $createdAt,
@@ -19,17 +20,23 @@ final class ProjectResponse
     /**
      * @return array{
      *   title: string,
-     *   description: string,
-     *   thumbnailPath: string,
+     *   descriptionEnglish: string,
+     *   descriptionSpanish: string,
+     *   thumbnailPath: ?string,
      *   videoPath: ?string,
-     *   createdAt: string
+     *   createdAt: string,
+     *   prideLevel: int,
+     *   link: ?string,
+     *   isPersonal: bool,
+     *   repo: ?string
      * }
      */
     public function toArray(): array
     {
         return [
             'title' => $this->title,
-            'description' => $this->description,
+            'descriptionEnglish' => $this->descriptionEnglish,
+            'descriptionSpanish' => $this->descriptionSpanish,
             'thumbnailPath' => $this->thumbnailPath,
             'videoPath' => $this->videoPath,
             'createdAt' => $this->createdAt,

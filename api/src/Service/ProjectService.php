@@ -22,7 +22,8 @@ final readonly class ProjectService
         return array_map(
             static fn (Project $project) => new ProjectResponse(
                 title: $project->getTitle(),
-                description: $project->getDescription(),
+                descriptionEnglish: $project->getDescriptionEnglish(),
+                descriptionSpanish: $project->getDescriptionSpanish(),
                 thumbnailPath: $project->getThumbnailPath(),
                 videoPath: $project->getVideoPath(),
                 createdAt: $project->getCreatedAt()->format(\DateTimeInterface::ATOM),
