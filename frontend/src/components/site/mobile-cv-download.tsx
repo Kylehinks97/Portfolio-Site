@@ -13,8 +13,8 @@ type MobileCvDownloadProps = {
 };
 
 const cvFileByLanguage: Record<Locale, string> = {
-  en: "/CV/Kyle_Hinks_CV_english.pdf",
-  es: "/CV/Kyle_Hinks_CV_espa%C3%B1ol.pdf",
+  en: "/CV/Kyle Hinks CV English.pdf",
+  es: "/CV/Kyle Hinks CV Spanish.pdf",
 };
 
 export function MobileCvDownload({ locale, messages }: MobileCvDownloadProps) {
