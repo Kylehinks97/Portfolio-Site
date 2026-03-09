@@ -364,7 +364,7 @@ const messages: Record<Locale, Messages> = {
     aboutMe: {
       title: "Sobre mí",
       description:
-        "Es difícil transmitirlo en este formato, pero me considero una persona con los pies en la tierra. Vine a España después de conocer a mi mujer en Inglaterra. Estamos esperando nuestro primer bebé en junio, y mi ambición es darle la mejor vida posible. Todo lo demás queda en segundo plano frente a eso.",
+        "Es difícil transmitirlo en este formato, pero me considero una persona con los pies en la tierra. Vine a España después de conocer a mi esposa en Inglaterra. Estamos esperando nuestro primer bebé en junio, y mi ambición es darles la mejor vida posible. Todo lo demás queda en segundo plano frente a eso.",
       likesTitle: "Me gusta",
       dislikesTitle: "No me gusta",
       like: ["Programación", "Deporte", "Cultura española", "Croquetas"],
