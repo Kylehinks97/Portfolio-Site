@@ -95,6 +95,30 @@
       "link": "https://custodio.digital/es",
       "isPersonal": false,
       "repo": null
+    },
+    {
+      "title": "Hinks Belloso Family Videos",
+      "descriptionEnglish": "Secure family video storage in Cloudflare Bucket, using Cloudflare pages and a worker. With authentication, image and video storage and sharing and search. To store family videos, especially important in JUne when my daughter is born.",
+      "descriptionSpanish": "Almacenamiento seguro de videos familiares en un Bucket de Cloudflare, utilizando Cloudflare Pages y un worker. Incluye autenticación, almacenamiento y compartición de imágenes y videos, además de búsqueda. Pensado para guardar videos familiares, especialmente importante en junio cuando nazca mi hija.",
+      "thumbnailPath": "family-videos.png",
+      "videoPath": null,
+      "createdAt": "2025-03-08T08:50:04+00:00",
+      "prideLevel": 2,
+      "link": "https://family-videos-2cs.pages.dev/",
+      "isPersonal": true,
+      "repo": null
+    },
+    {
+      "title": "Portfolio Site",
+      "descriptionEnglish": "The site you are on right now. NextJS frontend fetching projects from a Symfony API. Code is public to view",
+      "descriptionSpanish": "",
+      "thumbnailPath": "portfolio.png",
+      "videoPath": null,
+      "createdAt": "2025-03-08T08:50:04+00:00",
+      "prideLevel": 2,
+      "link": null,
+      "isPersonal": true,
+      "repo": "https://github.com/Kylehinks97/Portfolio-Site"
     }
   ]
 }
