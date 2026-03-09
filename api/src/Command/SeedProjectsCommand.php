@@ -126,6 +126,32 @@ final class SeedProjectsCommand extends Command
                 'is_personal' => false,
                 'repo' => null,
             ],
+            [
+                'id' => '6882959c-4ff6-4a2d-bfaf-ad5887e01644',
+                'description_english' => 'Secure family video storage in Cloudflare Bucket, using Cloudflare pages and a worker. With authentication, image and video storage and sharing and search. To store family videos, especially important in JUne when my daughter is born.',
+                'description_spanish' => 'Almacenamiento seguro de videos familiares en un Bucket de Cloudflare, utilizando Cloudflare Pages y un worker. Incluye autenticación, almacenamiento y compartición de imágenes y videos, además de búsqueda. Pensado para guardar videos familiares, especialmente importante en junio cuando nazca mi hija.',
+                'title' => 'Hinks Family Videos',
+                'thumbnail_path' => 'family-videos.png',
+                'video_path' => null,
+                'created_at' => '2025-03-09 08:50:04',
+                'pride_level' => 2,
+                'link' => 'https://family-videos-2cs.pages.dev/',
+                'is_personal' => true,
+                'repo' => null,
+            ],
+            [
+                'id' => '3b0f28a0-a30f-43d3-9f2e-255b004f67b1',
+                'title' => 'Portfolio Site',
+                'description_english' => 'The site you are on right now. NextJS frontend fetching projects from a Symfony API. Code is public to view',
+                'description_spanish' => 'El sitio en el que estás ahora mismo. Frontend en NextJS que obtiene proyectos desde una API en Symfony. El código es público para ver.',
+                'thumbnail_path' => 'portfolio.png',
+                'video_path' => null,
+                'created_at' => '2025-03-08 08:50:04',
+                'pride_level' => 2,
+                'link' => null,
+                'is_personal' => true,
+                'repo' => 'https://github.com/Kylehinks97/Portfolio-Site',
+            ]
         ];
         $rowsProcessed = 0;
 
