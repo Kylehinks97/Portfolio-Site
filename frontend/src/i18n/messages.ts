@@ -153,7 +153,7 @@ const messages: Record<Locale, Messages> = {
       stats: [
         { value: "3+", label: "Years of experience shipping for the web" },
         { value: "34+", label: "Technologies with practical experience using, professionally and privately" },
-        { value: "8", label: "Personal and professional projects to demonstrate my skills and experience" },
+        { value: "10", label: "Personal and professional projects to demonstrate my skills and experience" },
         { value: "100%", label: "Commitment to becoming a 10x developer" },
       ],
       featureTitle: "Technical skills and experience",
@@ -308,7 +308,7 @@ const messages: Record<Locale, Messages> = {
             "Tecnologías con experiencia práctica, profesionalmente y en proyectos personales",
         },
         {
-          value: "8",
+          value: "10",
           label: "Proyectos personales y profesionales para demostrar mis habilidades y experiencia",
         },
         { value: "100%", label: "Compromiso con convertirme en un desarrollador 10x" },
