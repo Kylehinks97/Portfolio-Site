@@ -474,3 +474,84 @@ a {
             0 8px 32px rgba(0, 0, 0, 0.4);
   }
 }
+
+.likes-card {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.likes-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 10px 40px rgba(16, 185, 129, 0.15);
+}
+
+.likes-card:hover .likes-icon {
+  animation: likes-icon-bounce 0.9s ease infinite alternate;
+}
+
+.likes-card:hover .likes-badge {
+  animation: likes-badge-float 1.6s ease-in-out infinite;
+}
+
+@keyframes likes-icon-bounce {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    transform: translateY(-6px) scale(1.08);
+  }
+}
+
+@keyframes likes-badge-float {
+  0% {
+    transform: translateY(0px);
+    box-shadow: 0 0 0 rgba(16,185,129,0);
+  }
+  50% {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(16,185,129,0.25);
+  }
+  100% {
+    transform: translateY(0px);
+    box-shadow: 0 0 0 rgba(16,185,129,0);
+  }
+}
+
+.dislikes-card {
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.dislikes-card:hover {
+  background: rgba(255, 0, 0, 0.05);
+}
+
+.dislikes-card:hover .dislikes-icon {
+  animation: dislikes-vibrate 0.35s linear infinite;
+}
+
+.dislikes-card:hover .dislikes-badge {
+  animation: dislikes-badge-pulse 0.8s ease infinite;
+}
+
+@keyframes dislikes-vibrate {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 1px); }
+  40% { transform: translate(2px, -1px); }
+  60% { transform: translate(-2px, 0); }
+  80% { transform: translate(2px, 1px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes dislikes-badge-pulse {
+  0% {
+    background: rgba(244,63,94,0.1);
+    transform: scale(1);
+  }
+  50% {
+    background: rgba(244,63,94,0.25);
+    transform: scale(1.06);
+  }
+  100% {
+    background: rgba(244,63,94,0.1);
+    transform: scale(1);
+  }
+}

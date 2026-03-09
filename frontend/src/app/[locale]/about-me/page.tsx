@@ -39,23 +39,25 @@ export default async function AboutMePage({ params }: AboutMePageProps) {
 
       <div className="mt-10 grid gap-6 lg:grid-cols-2">
         <Reveal delay={0.06}>
-          <Card className="min-h-72 border-white/10">
+          <Card className="likes-card min-h-72 border-white/10">
             <CardHeader>
-              <div className="mb-3 flex size-12 items-center justify-center rounded-2xl border border-white/10 bg-white/8">
+              <div className="likes-icon mb-3 flex size-12 items-center justify-center rounded-2xl border border-white/10 bg-white/8">
                 <Heart className="size-5 text-emerald-200" />
               </div>
+
               <CardTitle>{messages.aboutMe.likesTitle}</CardTitle>
               <CardDescription />
             </CardHeader>
+
             <CardContent>
               <div className="flex flex-wrap gap-2">
                 {messages.aboutMe.like.map((item) => (
-                  <Badge
-                    key={item}
-                    className="border-emerald-300/25 bg-emerald-300/10 text-emerald-50 normal-case tracking-normal"
-                  >
-                    {item}
-                  </Badge>
+                    <Badge
+                        key={item}
+                        className="likes-badge border-emerald-300/25 bg-emerald-300/10 text-emerald-50 normal-case tracking-normal"
+                    >
+                      {item}
+                    </Badge>
                 ))}
               </div>
             </CardContent>
@@ -63,23 +65,25 @@ export default async function AboutMePage({ params }: AboutMePageProps) {
         </Reveal>
 
         <Reveal delay={0.12}>
-          <Card className="min-h-72 border-white/10">
+          <Card className="dislikes-card min-h-72 border-white/10">
             <CardHeader>
-              <div className="mb-3 flex size-12 items-center justify-center rounded-2xl border border-white/10 bg-white/8">
+              <div className="dislikes-icon mb-3 flex size-12 items-center justify-center rounded-2xl border border-white/10 bg-white/8">
                 <Ban className="size-5 text-rose-200" />
               </div>
+
               <CardTitle>{messages.aboutMe.dislikesTitle}</CardTitle>
               <CardDescription />
             </CardHeader>
+
             <CardContent>
               <div className="flex flex-wrap gap-2">
                 {messages.aboutMe.dislike.map((item) => (
-                  <Badge
-                    key={item}
-                    className="border-rose-300/25 bg-rose-300/10 text-rose-50 normal-case tracking-normal"
-                  >
-                    {item}
-                  </Badge>
+                    <Badge
+                        key={item}
+                        className="dislikes-badge border-rose-300/25 bg-rose-300/10 text-rose-50 normal-case tracking-normal"
+                    >
+                      {item}
+                    </Badge>
                 ))}
               </div>
             </CardContent>
