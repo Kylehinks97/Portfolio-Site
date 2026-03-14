@@ -288,7 +288,7 @@ const messages: Record<Locale, Messages> = {
       availability: "Abierto a oportunidades freelance y full-time",
       eyebrow: "ingeniero fullstack • especialista en symfony • pro de react",
       title:
-        "Construyo experiencias digitales pulidas con UX afilado y backends escalables y de alto rendimiento.",
+        "Construyo experiencias digitales esculpidas con UX afilado y backends escalables y de alto rendimiento.",
       description: [
         "🧑🏼‍💻 Aporto 3 años de experiencia fullstack a un nuevo rol remoto o híbrido emocionante.",
         "📍 Vivo en Valladolid, España. A una distancia conmutable de Madrid.",
