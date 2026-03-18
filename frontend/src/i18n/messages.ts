@@ -206,7 +206,7 @@ const messages: Record<Locale, Messages> = {
     },
     aboutMe: {
       title: 'About Me',
-      description: 'It is hard to convey in this setting, but I believe myself to be a down-to-earth guy. I came to Spain after meeting my wife in England. We are expecting our first born in June, my ambition is to provide them the greatest life possible. Everything else about me is in the background to that.',
+      description: 'It is hard to convey in this setting, but I believe myself to be a down-to-earth guy. I came to Spain after meeting my wife in England.',
       likesTitle: "I like",
       dislikesTitle: "I avoid",
       like: ['Programming', 'Sports', 'Spanish culture', 'Croquetas'],
@@ -364,7 +364,7 @@ const messages: Record<Locale, Messages> = {
     aboutMe: {
       title: "Sobre mí",
       description:
-        "Es difícil transmitirlo en este formato, pero me considero una persona con los pies en la tierra. Vine a España después de conocer a mi esposa en Inglaterra. Estamos esperando nuestro primer bebé en junio, y mi ambición es darles la mejor vida posible. Todo lo demás queda en segundo plano frente a eso.",
+        "Es difícil transmitirlo en este formato, pero me considero una persona con los pies en la tierra. Vine a España después de conocer a mi esposa en Inglaterra.",
       likesTitle: "Me gusta",
       dislikesTitle: "No me gusta",
       like: ["Programación", "Deporte", "Cultura española", "Croquetas"],
