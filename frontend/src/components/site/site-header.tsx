@@ -1,6 +1,6 @@
 "use client";
 
-import {ArrowUpRight, Mail, Menu} from "lucide-react";
+import { Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -40,25 +40,27 @@ export function SiteHeader({ locale, messages }: SiteHeaderProps) {
   ];
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/6 bg-slate-950/65 backdrop-blur-xl">
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-6 py-4 lg:px-10">
+    <header className="sticky top-0 z-40 border-b border-border bg-background">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-6 py-3 lg:px-10">
+        {/* Logo / wordmark */}
         <Link
-          className="inline-flex items-center gap-3 text-sm font-semibold tracking-[0.24em] uppercase"
+          className="inline-flex items-center gap-3 font-semibold tracking-tight"
           href={`/${locale}`}
         >
-          <span className="flex size-14 items-center justify-center overflow-hidden rounded-full border border-white/10 bg-white/8 text-base tracking-normal md:size-16 lg:size-20">
+          <span className="flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-full border border-border bg-secondary">
             <Image
               src="/images/profile-pic.webp"
-              width={100}
-              height={100}
+              width={80}
+              height={80}
               alt="Profile of Kyle Hinks"
               loading="eager"
             />
           </span>
-          <span className="text-foreground/90">Kyle Hinks</span>
+          <span className="text-sm text-foreground">Kyle Hinks</span>
         </Link>
 
-        <nav className="hidden items-center gap-6 lg:flex">
+        {/* Desktop nav */}
+        <nav className="hidden items-center gap-1 lg:flex">
           {navLinks.map((link) => {
             const linkPath = normalizePath(link.href);
             const isActive = link.exact
@@ -70,10 +72,10 @@ export function SiteHeader({ locale, messages }: SiteHeaderProps) {
               <Link
                 key={link.href}
                 className={cn(
-                  "relative inline-flex rounded-full px-3 py-1.5 text-sm transition-all duration-200",
+                  "nav-underline relative inline-flex px-3 py-2 text-sm transition-colors",
                   isActive
-                    ? "bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-[0_14px_45px_rgba(244,114,182,0.22)]"
-                    : "text-muted-foreground hover:text-foreground after:absolute after:right-3 after:bottom-1 after:left-3 after:h-px after:origin-left after:scale-x-0 after:bg-foreground after:transition-transform after:duration-300 hover:after:scale-x-100",
+                    ? "active text-foreground font-medium"
+                    : "text-muted-foreground hover:text-foreground",
                 )}
                 href={link.href}
               >
@@ -83,7 +85,8 @@ export function SiteHeader({ locale, messages }: SiteHeaderProps) {
           })}
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        {/* Desktop actions */}
+        <div className="hidden items-center gap-2 lg:flex">
           <LocaleSwitcher
             currentLocale={locale}
             label={messages.common.language}
@@ -91,6 +94,8 @@ export function SiteHeader({ locale, messages }: SiteHeaderProps) {
           <ContactButton messages={messages} locale={locale} />
           <CvDownloadDropdown locale={locale} messages={messages} />
         </div>
+
+        {/* Mobile menu */}
         <Sheet>
           <SheetTrigger asChild>
             <Button
@@ -105,10 +110,13 @@ export function SiteHeader({ locale, messages }: SiteHeaderProps) {
           </SheetTrigger>
           <SheetContent className="lg:hidden">
             <MobileSheetHeader className="pr-14">
-              <SheetTitle className="flex justify-between items-center"><strong>KYLE HINKS</strong></SheetTitle>
+              <SheetTitle>
+                <span className="text-sm font-semibold tracking-tight">KYLE HINKS</span>
+              </SheetTitle>
+              <SheetDescription className="sr-only">Navigation menu</SheetDescription>
             </MobileSheetHeader>
             <div className="flex min-h-0 flex-1 flex-col gap-6 overflow-y-auto px-6 pb-6">
-              <nav className="flex flex-col gap-2">
+              <nav className="flex flex-col gap-1">
                 {navLinks.map((link) => {
                   const linkPath = normalizePath(link.href);
                   const isActive = link.exact
@@ -120,10 +128,10 @@ export function SiteHeader({ locale, messages }: SiteHeaderProps) {
                     <SheetClose asChild key={link.href}>
                       <Link
                         className={cn(
-                          "rounded-2xl px-4 py-3 text-base transition-colors",
+                          "rounded-md px-4 py-3 text-base transition-colors",
                           isActive
-                            ? "bg-primary text-primary-foreground"
-                            : "border border-white/10 bg-white/4 text-foreground/90 hover:bg-white/8",
+                            ? "bg-primary text-primary-foreground font-medium"
+                            : "text-foreground hover:bg-secondary",
                         )}
                         href={link.href}
                       >
@@ -133,22 +141,20 @@ export function SiteHeader({ locale, messages }: SiteHeaderProps) {
                   );
                 })}
               </nav>
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-3">
                 <SheetClose asChild>
-                  <Button asChild className="w-full" size="lg">
+                  <Button asChild className="w-full">
                     <Link href={`/${locale}/contact`}>
                       {messages.nav.contact}
-                      <ArrowUpRight className="size-4" />
                     </Link>
                   </Button>
                 </SheetClose>
                 <MobileCvDownload locale={locale} messages={messages} />
               </div>
-              <div className="flex justify-center items-center">
+              <div className="flex items-center">
                 <LocaleSwitcher
-                    className="w-fit"
-                    currentLocale={locale}
-                    label={messages.common.language}
+                  currentLocale={locale}
+                  label={messages.common.language}
                 />
               </div>
             </div>

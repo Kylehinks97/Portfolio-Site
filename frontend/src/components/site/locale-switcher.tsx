@@ -31,7 +31,7 @@ export function LocaleSwitcher({
       <Link
         href={nextTarget}
         aria-label={`Switch language to ${localeNames[nextLocale]}`}
-        className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/6 p-1 backdrop-blur"
+        className="inline-flex items-center gap-0.5 rounded-md border border-border bg-secondary p-1"
       >
         {(["en", "es"] as const).map((locale) => {
           const isActive = locale === currentLocale;
@@ -40,9 +40,9 @@ export function LocaleSwitcher({
               key={locale}
               aria-hidden="true"
               className={cn(
-                "inline-flex h-8 w-10 items-center justify-center rounded-full text-lg transition-colors",
+                "inline-flex h-7 w-9 items-center justify-center rounded text-base transition-colors",
                 isActive
-                  ? "bg-white text-slate-950"
+                  ? "bg-card text-foreground shadow-sm"
                   : "text-muted-foreground hover:text-foreground",
               )}
             >

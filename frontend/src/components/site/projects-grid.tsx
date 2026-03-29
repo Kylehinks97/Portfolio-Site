@@ -174,8 +174,8 @@ export function ProjectsGrid({
 
   if (status === "loading") {
     return (
-      <div className="mt-10">
-        <Card className="min-h-48 border-white/10">
+      <div>
+        <Card className="min-h-40">
           <CardHeader>
             <CardTitle>{messages.loadingTitle}</CardTitle>
             <CardDescription>{messages.loadingDescription}</CardDescription>
@@ -187,8 +187,8 @@ export function ProjectsGrid({
 
   if (status === "empty") {
     return (
-      <div className="mt-10">
-        <Card className="min-h-48 border-white/10">
+      <div>
+        <Card className="min-h-40">
           <CardHeader>
             <CardTitle>{messages.emptyTitle}</CardTitle>
             <CardDescription>{messages.emptyDescription}</CardDescription>
@@ -199,106 +199,103 @@ export function ProjectsGrid({
   }
 
   return (
-    <div className="mt-10 grid gap-6 lg:grid-cols-2">
+    <div className="grid gap-5 lg:grid-cols-2">
       {projects.map((project) => {
         const thumbnailUrl = resolveThumbnailUrl(project?.thumbnailPath);
         const videoUrl = project.videoPath
-            ? resolveVideoUrl(project.videoPath)
-            : null;
+          ? resolveVideoUrl(project.videoPath)
+          : null;
 
         return (
-            <Card
-                key={`${project.title}-${project.createdAt}`}
-                className="project-card h-full overflow-hidden border-white/10 flex flex-col"
-            >
-              <div className="relative aspect-video w-full bg-black/40">
-                {videoUrl ? (
-                    <video
-                        className="h-full w-full object-cover"
-                        controls
-                        playsInline
-                        poster={thumbnailUrl}
-                        preload="metadata"
-                    >
-                      <source src={videoUrl} type={getVideoMimeType(videoUrl)} />
-                      <track
-                          default={locale === "es"}
-                          kind="captions"
-                          label={
-                            locale === "es" ? "Spanish captions" : "English captions"
-                          }
-                          src="/videos/project-captions.vtt"
-                          srcLang={locale}
-                      />
-                    </video>
+          <Card
+            key={`${project.title}-${project.createdAt}`}
+            className="project-card flex h-full flex-col overflow-hidden"
+          >
+            <div className="relative aspect-video w-full bg-secondary">
+              {videoUrl ? (
+                <video
+                  className="h-full w-full object-cover"
+                  controls
+                  playsInline
+                  poster={thumbnailUrl}
+                  preload="metadata"
+                >
+                  <source src={videoUrl} type={getVideoMimeType(videoUrl)} />
+                  <track
+                    default={locale === "es"}
+                    kind="captions"
+                    label={
+                      locale === "es" ? "Spanish captions" : "English captions"
+                    }
+                    src="/videos/project-captions.vtt"
+                    srcLang={locale}
+                  />
+                </video>
+              ) : (
+                thumbnailUrl && (
+                  <Image
+                    alt={project.title}
+                    className="object-cover"
+                    fill
+                    loading="lazy"
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    src={thumbnailUrl}
+                    unoptimized
+                  />
+                )
+              )}
+            </div>
+
+            <CardHeader className="flex-grow">
+              <CardTitle>
+                {project.link ? (
+                  <a
+                    href={project.link}
+                    className="hover:text-primary transition-colors"
+                  >
+                    {project.title}
+                  </a>
                 ) : (
-                    thumbnailUrl && (
-                        <Image
-                            alt={project.title}
-                            className="object-cover"
-                            fill
-                            loading="lazy"
-                            sizes="(min-width: 1024px) 50vw, 100vw"
-                            src={thumbnailUrl}
-                            unoptimized
-                        />
-                    )
+                  <span>{project.title}</span>
                 )}
-              </div>
+              </CardTitle>
+              <CardDescription>
+                {getProjectDescription(project, locale)}
+              </CardDescription>
+            </CardHeader>
 
-              <CardHeader className="flex-grow">
-                <CardTitle>
-                  <div className="w-full flex justify-between items-center">
-                    <div>
-                      {project.link ? (
-                          <a
-                              href={project.link}
-                              className="cursor-pointer hover:underline"
-                          >
-                            {project.title}
-                          </a>
-                      ) : (
-                          <span className="cursor-default">{project.title}</span>
-                      )}
-                    </div>
-                  </div>
-                </CardTitle>
+            <div className="flex items-center justify-between gap-4 border-t border-border mx-6 mb-5 mt-auto pt-4">
+              <Badge className="animated-badge normal-case tracking-normal">
+                {project.isPersonal
+                  ? messages.isPersonal
+                  : messages.isProfessional}
+              </Badge>
 
-                <CardDescription>
-                  {getProjectDescription(project, locale)}
-                </CardDescription>
-              </CardHeader>
-
-              <div className="flex justify-between mx-6 items-center gap-x-4 mb-6 mt-auto">
-                <Badge className="animated-badge">
-                  {project.isPersonal
-                      ? messages.isPersonal
-                      : messages.isProfessional}
-                </Badge>
-
+              <div className="flex items-center gap-2">
                 {project.link && (
-                    <Link
-                        target="_blank"
-                        href={project.link}
-                        className="card-link card-link-globe border-2 border-border rounded gap-x-2"
-                    >
-                      <p className="text-sm">Visit</p>
-                      <CiGlobe />
-                    </Link>
+                  <Link
+                    target="_blank"
+                    href={project.link}
+                    className="card-link"
+                  >
+                    <CiGlobe className="size-4" />
+                    Visit
+                  </Link>
                 )}
 
                 {project.repo && (
-                    <Link
-                        target="_blank"
-                        href={project.repo}
-                        className="card-link card-link-github border-2 border-border rounded gap-x-2"
-                    >
-                      <p className="text-sm">Visit</p>
-                      <FaGithub />
-                    </Link>
+                  <Link
+                    target="_blank"
+                    href={project.repo}
+                    className="card-link"
+                  >
+                    <FaGithub className="size-3.5" />
+                    Repo
+                  </Link>
                 )}
               </div>
-            </Card>
+            </div>
+          </Card>
         );
       })}
     </div>

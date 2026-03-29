@@ -65,15 +65,15 @@ export function ContactForm({ messages }: ContactFormProps) {
   };
 
   return (
-    <Card className="border-white/10">
+    <Card>
       <CardHeader>
         <CardTitle>{messages.submit}</CardTitle>
       </CardHeader>
       <CardContent>
         <form className="space-y-5" onSubmit={form.handleSubmit(onSubmit)}>
           <div className="grid gap-5 md:grid-cols-2">
-            <div className="space-y-2">
-              <label className="text-sm font-medium" htmlFor="name">
+            <div className="space-y-1.5">
+              <label className="text-sm font-medium text-foreground" htmlFor="name">
                 {messages.name}
               </label>
               <Input
@@ -82,14 +82,14 @@ export function ContactForm({ messages }: ContactFormProps) {
                 {...form.register("name")}
               />
               {form.formState.errors.name ? (
-                <p className="text-sm text-rose-300">
+                <p className="text-xs text-red-600">
                   {form.formState.errors.name.message}
                 </p>
               ) : null}
             </div>
 
-            <div className="space-y-2">
-              <label className="text-sm font-medium" htmlFor="email">
+            <div className="space-y-1.5">
+              <label className="text-sm font-medium text-foreground" htmlFor="email">
                 {messages.email}
               </label>
               <Input
@@ -99,15 +99,15 @@ export function ContactForm({ messages }: ContactFormProps) {
                 {...form.register("email")}
               />
               {form.formState.errors.email ? (
-                <p className="text-sm text-rose-300">
+                <p className="text-xs text-red-600">
                   {form.formState.errors.email.message}
                 </p>
               ) : null}
             </div>
           </div>
 
-          <div className="space-y-2">
-            <label className="text-sm font-medium" htmlFor="company">
+          <div className="space-y-1.5">
+            <label className="text-sm font-medium text-foreground" htmlFor="company">
               {messages.company}
             </label>
             <Input
@@ -116,14 +116,14 @@ export function ContactForm({ messages }: ContactFormProps) {
               {...form.register("company")}
             />
             {form.formState.errors.company ? (
-              <p className="text-sm text-rose-300">
+              <p className="text-xs text-red-600">
                 {form.formState.errors.company.message}
               </p>
             ) : null}
           </div>
 
-          <div className="space-y-2">
-            <label className="text-sm font-medium" htmlFor="message">
+          <div className="space-y-1.5">
+            <label className="text-sm font-medium text-foreground" htmlFor="message">
               {messages.message}
             </label>
             <Textarea
@@ -132,7 +132,7 @@ export function ContactForm({ messages }: ContactFormProps) {
               {...form.register("message")}
             />
             {form.formState.errors.message ? (
-              <p className="text-sm text-rose-300">
+              <p className="text-xs text-red-600">
                 {form.formState.errors.message.message}
               </p>
             ) : null}
@@ -140,10 +140,10 @@ export function ContactForm({ messages }: ContactFormProps) {
 
           {serverMessage ? (
             <div
-              className={`rounded-2xl border px-4 py-3 text-sm ${
+              className={`rounded-md border px-4 py-3 text-sm ${
                 serverMessage.kind === "success"
-                  ? "border-emerald-400/20 bg-emerald-400/10 text-emerald-100"
-                  : "border-rose-400/20 bg-rose-400/10 text-rose-100"
+                  ? "border-green-200 bg-green-50 text-green-800"
+                  : "border-red-200 bg-red-50 text-red-800"
               }`}
             >
               {serverMessage.text}
@@ -151,7 +151,7 @@ export function ContactForm({ messages }: ContactFormProps) {
           ) : null}
 
           <Button
-            className="w-full sm:w-auto text-white"
+            className="w-full sm:w-auto"
             disabled={isPending}
             type="submit"
           >
