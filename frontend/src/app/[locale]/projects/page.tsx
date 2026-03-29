@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import { ProjectsGrid } from "@/components/site/projects-grid";
 import { Reveal } from "@/components/site/reveal";
-import { Badge } from "@/components/ui/badge";
 import { isLocale } from "@/i18n/config";
 import { getMessages } from "@/i18n/messages";
 import { envConfig } from "@/envConfig";
@@ -22,12 +21,14 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
 
   return (
     <main className="mx-auto w-full max-w-7xl px-6 py-20 lg:px-10">
-      <Reveal className="max-w-3xl space-y-4">
-        <Badge className="badge-liquid liquid">{messages.nav.projects}</Badge>
-        <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
+      <Reveal className="mb-12 max-w-3xl space-y-4">
+        <p className="text-xs font-semibold tracking-[0.28em] uppercase text-primary">
+          {messages.nav.projects}
+        </p>
+        <h1 className="font-serif text-4xl tracking-tight text-foreground sm:text-5xl">
           {messages.projects.title}
         </h1>
-        <p className="text-lg leading-8 text-muted-foreground">
+        <p className="text-base leading-7 text-muted-foreground">
           {messages.projects.description}
         </p>
       </Reveal>

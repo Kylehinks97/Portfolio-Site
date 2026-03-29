@@ -35,7 +35,7 @@ export function CvDownloadDropdown({
   const languageSelector = (groupName: string) => (
     <div
       aria-label={messages.nav.cvLanguagePrompt}
-      className="grid grid-cols-2 gap-2"
+      className="grid grid-cols-2 gap-1.5"
       role="radiogroup"
     >
       {languageOptions.map((option) => {
@@ -44,10 +44,10 @@ export function CvDownloadDropdown({
           <label
             key={`${groupName}-${option.value}`}
             className={cn(
-              "cursor-pointer rounded-xl border px-3 py-2 text-center text-sm transition-colors",
+              "cursor-pointer rounded border px-3 py-2 text-center text-sm transition-colors",
               isSelected
-                ? "border-primary bg-primary/20 text-foreground"
-                : "border-white/12 bg-white/4 text-muted-foreground hover:text-foreground",
+                ? "border-primary bg-primary/10 text-primary font-medium"
+                : "border-border bg-secondary text-muted-foreground hover:text-foreground",
             )}
           >
             <input
@@ -71,7 +71,7 @@ export function CvDownloadDropdown({
         {messages.nav.cvLanguagePrompt}
       </p>
       {languageSelector("cv-language")}
-      <Button asChild className="mt-3 w-full py-6">
+      <Button asChild className="mt-3 w-full">
         <a download href={cvFileByLanguage[selectedCvLanguage]}>
           {messages.nav.cvDownloadButton}
           <DownloadIcon className="size-4" />
@@ -86,29 +86,28 @@ export function CvDownloadDropdown({
         <Button
           aria-expanded="false"
           className="inline-flex"
-          size="lg"
           type="button"
           variant="secondary"
         >
           {messages.nav.downloadCV}
           <DownloadIcon className="size-4" />
         </Button>
-        <div className="pointer-events-none absolute top-full right-0 z-50 w-64 pt-2 opacity-0 transition-opacity duration-200 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
-          <div className="rounded-2xl border border-white/10 bg-slate-950/95 p-3 shadow-xl">
+        <div className="pointer-events-none absolute top-full right-0 z-50 w-60 pt-2 opacity-0 transition-opacity duration-200 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
+          <div className="rounded-lg border border-border bg-card p-3 shadow-lg">
             {panelContent}
           </div>
         </div>
       </div>
       <details className={cn("relative sm:hidden", className)}>
         <summary className="list-none">
-          <Button asChild size="lg" variant="secondary">
+          <Button asChild variant="secondary">
             <span>
               {messages.nav.downloadCV}
               <DownloadIcon className="size-4" />
             </span>
           </Button>
         </summary>
-        <div className="absolute top-full right-0 z-50 mt-2 w-64 rounded-2xl border border-white/10 bg-slate-950/95 p-3 shadow-xl">
+        <div className="absolute top-full right-0 z-50 mt-2 w-60 rounded-lg border border-border bg-card p-3 shadow-lg">
           {panelContent}
         </div>
       </details>

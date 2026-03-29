@@ -28,13 +28,13 @@ export function MobileCvDownload({ locale, messages }: MobileCvDownloadProps) {
   ];
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/4 p-4">
+    <div className="rounded-lg border border-border bg-secondary p-4">
       <p className="mb-3 text-sm font-medium text-foreground">
         {messages.nav.downloadCV}
       </p>
       <div
         aria-label={messages.nav.cvLanguagePrompt}
-        className="grid grid-cols-2 gap-2"
+        className="grid grid-cols-2 gap-1.5"
         role="radiogroup"
       >
         {languageOptions.map((option) => {
@@ -44,10 +44,10 @@ export function MobileCvDownload({ locale, messages }: MobileCvDownloadProps) {
             <label
               key={option.value}
               className={cn(
-                "cursor-pointer rounded-xl border px-3 py-2 text-center text-sm transition-colors",
+                "cursor-pointer rounded border px-3 py-2 text-center text-sm transition-colors",
                 isSelected
-                  ? "border-primary bg-primary/20 text-foreground"
-                  : "border-white/12 bg-white/4 text-muted-foreground hover:text-foreground",
+                  ? "border-primary bg-primary/10 text-primary font-medium"
+                  : "border-border bg-card text-muted-foreground hover:text-foreground",
               )}
             >
               <input
@@ -63,7 +63,7 @@ export function MobileCvDownload({ locale, messages }: MobileCvDownloadProps) {
           );
         })}
       </div>
-      <Button asChild className="mt-3 w-full py-6">
+      <Button asChild className="mt-3 w-full">
         <a download href={cvFileByLanguage[selectedCvLanguage]}>
           {messages.nav.cvDownloadButton}
           <DownloadIcon className="size-4" />

@@ -1,186 +1,162 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles, Star, Zap } from "lucide-react";
+import { ArrowRight, BookOpen, Code2, Layers } from "lucide-react";
 import Link from "next/link";
 import { Reveal } from "@/components/site/reveal";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
+  CardDescription,
 } from "@/components/ui/card";
 import type { Locale } from "@/i18n/config";
 import type { Messages } from "@/i18n/messages";
-import {LogoMarquee} from "@/components/site/logo-marquee";
+import { LogoMarquee } from "@/components/site/logo-marquee";
 
 type HomeViewProps = {
   locale: Locale;
   messages: Messages["home"];
 };
 
-const featureIcons = [Sparkles, Zap, Star];
+const featureIcons = [Layers, Code2, BookOpen];
 
 export function HomeView({ locale, messages }: HomeViewProps) {
   return (
-    <main className="relative overflow-hidden">
-      <section className="relative isolate">
-        <div className="absolute inset-0 -z-10">
-          <div className="mesh-overlay absolute inset-0 opacity-50" />
-          <div className="animate-glow absolute left-[8%] top-24 size-48 rounded-full bg-fuchsia-400/20 blur-3xl" />
-          <div className="animate-float-slow absolute right-[12%] top-48 size-64 rounded-full bg-sky-400/20 blur-3xl" />
-          <div className="animate-float-delay absolute bottom-12 left-1/2 size-56 -translate-x-1/2 rounded-full bg-violet-500/15 blur-3xl" />
-        </div>
+    <main>
+      {/* ── Hero ─────────────────────────────────── */}
+      <section className="mx-auto w-full max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+        <div className="grid items-start gap-16 lg:grid-cols-[1.2fr_0.8fr]">
+          {/* Left — copy */}
+          <div className="space-y-10">
+            <motion.div
+              className="space-y-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="inline-flex items-center gap-2">
+                <span className="inline-block size-2 rounded-full bg-primary" />
+                <span className="text-xs font-medium tracking-[0.18em] uppercase text-primary">
+                  {messages.availability}
+                </span>
+              </div>
 
-        <div className="mx-auto flex min-h-[calc(100vh-81px)] w-full max-w-7xl flex-col justify-center gap-16 px-6 py-20 lg:px-10">
-          <div className="grid items-center gap-14 lg:grid-cols-[1.15fr_0.85fr]">
-            <div className="space-y-8">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7 }}
-              >
-                <Badge className="badge-liquid liquid">{messages.availability}</Badge>
-              </motion.div>
-
-              <motion.div
-                className="space-y-6"
-                initial={{ opacity: 0, y: 28 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.12, duration: 0.8 }}
-              >
-                <p className="text-sm tracking-[0.28em] text-muted-foreground uppercase">
+              <div>
+                <p className="mb-3 text-xs font-medium tracking-[0.28em] uppercase text-muted-foreground">
                   {messages.eyebrow}
                 </p>
-                <h1 className="max-w-4xl text-5xl font-semibold tracking-tight text-balance sm:text-6xl lg:text-7xl">
-                  <span className="text-gradient">{messages.title}</span>
+                <h1 className="font-serif text-5xl leading-[1.1] tracking-tight text-balance text-foreground sm:text-6xl lg:text-7xl">
+                  {messages.title}
                 </h1>
-                {messages.description.map((desc) => (
-                    <p
-                        key={desc}
-                        className="max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl"
-                    >
-                      {desc}
-                    </p>
-                ))}
-              </motion.div>
+              </div>
 
-              <motion.div
-                className="flex flex-col gap-4 sm:flex-row"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.8 }}
-              >
-                <Button asChild size="lg">
-                  <Link href={`/${locale}/projects`}>
-                    {messages.primaryCta}
-                    <ArrowRight className="size-4" />
-                  </Link>
-                </Button>
-                <Button asChild size="lg" variant="secondary">
-                  <Link href={`/${locale}/contact`}>
-                    {messages.secondaryCta}
-                  </Link>
-                </Button>
-              </motion.div>
-            </div>
+              {messages.description.map((desc) => (
+                <p
+                  key={desc}
+                  className="max-w-xl text-base leading-7 text-muted-foreground sm:text-lg"
+                >
+                  {desc}
+                </p>
+              ))}
+            </motion.div>
 
             <motion.div
-              className="relative"
-              initial={{ opacity: 0, scale: 0.96, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ delay: 0.18, duration: 0.9 }}
+              className="flex flex-col gap-3 sm:flex-row"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
             >
-              <Card className="relative overflow-hidden border-white/12 p-8 card-glow">
-                <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
-                <div className="grid gap-6">
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="space-y-3">
-                      <p className="text-sm tracking-[0.24em] text-muted-foreground uppercase">
-                        {messages.visualEyebrow}
-                      </p>
-                      <p className="max-w-xs text-2xl font-semibold">
-                        {messages.visualTitle}
-                      </p>
-                    </div>
-                    <div className="animate-float-slow rounded-full border border-white/12 bg-white/8 p-4">
-                      <Sparkles className="size-7 text-sky-200" />
-                    </div>
-                  </div>
-
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    {messages.stats.map((item) => (
-                      <motion.div
-                        key={item.label}
-                        className="rounded-[24px] project-card border border-white/10 bg-white/6 p-5"
-                        transition={{
-                          type: "spring",
-                          stiffness: 240,
-                          damping: 18,
-                        }}
-                        whileHover={{ y: -6 }}
-                      >
-                        <div className="text-3xl font-semibold text-foreground">
-                          {item.value}
-                        </div>
-                        <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                          {item.label}
-                        </p>
-                      </motion.div>
-                    ))}
-                    <motion.div
-                      className="rounded-[24px] project-card border border-fuchsia-300/20 bg-fuchsia-300/10 p-5 sm:col-span-2"
-                      transition={{
-                        type: "spring",
-                        stiffness: 240,
-                        damping: 18,
-                      }}
-                      whileHover={{ y: -6 }}
-                    >
-                      <p className="text-sm tracking-[0.2em] text-fuchsia-100 uppercase">
-                        {messages.principleEyebrow}
-                      </p>
-                      <p className="mt-3 text-lg text-fuchsia-50">
-                        {messages.principleText}
-                      </p>
-                    </motion.div>
-                  </div>
-                </div>
-              </Card>
+              <Button asChild size="lg">
+                <Link href={`/${locale}/projects`}>
+                  {messages.primaryCta}
+                  <ArrowRight className="size-4" />
+                </Link>
+              </Button>
+              <Button asChild size="lg" variant="secondary">
+                <Link href={`/${locale}/contact`}>
+                  {messages.secondaryCta}
+                </Link>
+              </Button>
             </motion.div>
           </div>
+
+          {/* Right — stats card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.7 }}
+          >
+            <Card className="overflow-hidden">
+              <CardHeader className="pb-4">
+                <p className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground">
+                  {messages.visualEyebrow}
+                </p>
+                <CardTitle className="text-lg font-semibold">
+                  {messages.visualTitle}
+                </CardTitle>
+              </CardHeader>
+
+              <div className="grid grid-cols-2 gap-px bg-border mx-6 rounded-md overflow-hidden mb-6">
+                {messages.stats.map((item) => (
+                  <div
+                    key={item.label}
+                    className="bg-card px-4 py-4"
+                  >
+                    <div className="text-2xl font-bold text-foreground tabular-nums">
+                      {item.value}
+                    </div>
+                    <p className="mt-1 text-xs text-muted-foreground leading-5">
+                      {item.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="border-t border-border mx-6 mb-6 pt-4">
+                <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-primary mb-1.5">
+                  {messages.principleEyebrow}
+                </p>
+                <p className="text-sm text-muted-foreground leading-6">
+                  {messages.principleText}
+                </p>
+              </div>
+            </Card>
+          </motion.div>
         </div>
       </section>
 
+      {/* ── Divider + Marquee ─────────────────────── */}
+      <div className="border-t border-border" />
       <LogoMarquee />
+      <div className="border-b border-border" />
 
-      <section className="mx-auto w-full max-w-7xl px-6 py-8 lg:px-10">
-        <Reveal className="space-y-4">
-          <Badge className="badge-liquid liquid">{messages.featureTitle}</Badge>
-          <div className="max-w-3xl space-y-3">
-            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-              {messages.featureTitle}
-            </h2>
-            <p className="text-lg leading-8 text-muted-foreground">
-              {messages.featureDescription}
-            </p>
-          </div>
+      {/* ── Skills ───────────────────────────────── */}
+      <section className="mx-auto w-full max-w-7xl px-6 py-20 lg:px-10">
+        <Reveal className="mb-10 space-y-3">
+          <p className="text-xs font-semibold tracking-[0.28em] uppercase text-primary">
+            01
+          </p>
+          <h2 className="font-serif text-3xl tracking-tight text-foreground sm:text-4xl">
+            {messages.featureTitle}
+          </h2>
+          <p className="max-w-2xl text-base leading-7 text-muted-foreground">
+            {messages.featureDescription}
+          </p>
         </Reveal>
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-3">
+        <div className="grid gap-5 lg:grid-cols-3">
           {messages.features.map((feature, index) => {
             const Icon = featureIcons[index];
-
             return (
-              <Reveal key={feature.title} delay={index * 0.08}>
-                <motion.div whileHover={{ y: -8 }}>
-                  <Card className="card-shiny h-full border-white/10">
+              <Reveal key={feature.title} delay={index * 0.07}>
+                <motion.div whileHover={{ y: -4 }} transition={{ type: "spring", stiffness: 300, damping: 20 }}>
+                  <Card className="h-full">
                     <CardHeader>
-                      <div className="mb-2 flex size-12 items-center justify-center rounded-2xl border border-white/12 bg-white/8">
-                        <Icon className="size-5 text-sky-200" />
+                      <div className="mb-3 flex size-10 items-center justify-center rounded-md border border-border bg-secondary">
+                        <Icon className="size-4 text-primary" />
                       </div>
                       <CardTitle>{feature.title}</CardTitle>
                       <CardDescription>{feature.description}</CardDescription>
@@ -193,63 +169,71 @@ export function HomeView({ locale, messages }: HomeViewProps) {
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-7xl px-6 py-20 lg:px-10">
-        <Reveal className="max-w-3xl space-y-3">
-          <Badge className="badge-liquid liquid">{messages.processTitle}</Badge>
-          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-            {messages.processTitle}
-          </h2>
-          <p className="text-lg leading-8 text-muted-foreground">
-            {messages.processDescription}
-          </p>
-        </Reveal>
+      {/* ── Languages / Process ──────────────────── */}
+      <section className="border-t border-border">
+        <div className="mx-auto w-full max-w-7xl px-6 py-20 lg:px-10">
+          <Reveal className="mb-10 space-y-3">
+            <p className="text-xs font-semibold tracking-[0.28em] uppercase text-primary">
+              02
+            </p>
+            <h2 className="font-serif text-3xl tracking-tight text-foreground sm:text-4xl">
+              {messages.processTitle}
+            </h2>
+            <p className="max-w-2xl text-base leading-7 text-muted-foreground">
+              {messages.processDescription}
+            </p>
+          </Reveal>
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-3">
-          {messages.process.map((item, index) => (
-            <Reveal key={item.step} delay={index * 0.08}>
-              <motion.div whileHover={{ y: -8 }}>
-                <Card className="card-shiny h-full border-white/10">
-                  <CardHeader>
-                    <p className="text-sm tracking-[0.22em] text-fuchsia-200 uppercase">
-                      {item.step}
-                    </p>
-                    <CardTitle>{item.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="leading-7 text-muted-foreground">
-                      {item.description}
-                    </p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </Reveal>
-          ))}
+          <div className="grid gap-5 lg:grid-cols-3">
+            {messages.process.map((item, index) => (
+              <Reveal key={item.step} delay={index * 0.07}>
+                <motion.div whileHover={{ y: -4 }} transition={{ type: "spring", stiffness: 300, damping: 20 }}>
+                  <Card className="h-full">
+                    <CardHeader>
+                      <p className="text-xs font-semibold tracking-[0.22em] uppercase text-primary">
+                        {item.step}
+                      </p>
+                      <CardTitle>{item.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm leading-7 text-muted-foreground">
+                        {item.description}
+                      </p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-7xl px-6 pb-20 lg:px-10">
-        <Reveal>
-          <Card className="relative overflow-hidden border-white/12 px-6 py-8 sm:px-10 sm:py-10 project-card">
-            <div className="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-sky-400/10 to-transparent blur-3xl" />
-            <div className="relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-              <div className="max-w-2xl space-y-3">
-                <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-                  {messages.closingTitle}
-                </h2>
-                <p className="text-lg leading-8 text-muted-foreground">
-                  {messages.closingDescription}
-                </p>
-              </div>
-              <Button asChild size="lg">
+      {/* ── Closing CTA — dark inversion block ───── */}
+      <Reveal>
+        <section className="dark-section">
+          <div className="mx-auto flex w-full max-w-7xl flex-col items-start gap-8 px-6 py-20 lg:flex-row lg:items-center lg:justify-between lg:px-10 lg:py-24">
+            <div className="space-y-3">
+              <h2 className="font-serif text-4xl tracking-tight sm:text-5xl">
+                {messages.closingTitle}
+              </h2>
+              <p className="max-w-xl text-base leading-7 opacity-60">
+                {messages.closingDescription}
+              </p>
+            </div>
+            <div className="shrink-0">
+              <Button
+                asChild
+                className="bg-primary text-primary-foreground hover:bg-primary/90"
+              >
                 <Link href={`/${locale}/contact`}>
                   {messages.closingCta}
                   <ArrowRight className="size-4" />
                 </Link>
               </Button>
             </div>
-          </Card>
-        </Reveal>
-      </section>
+          </div>
+        </section>
+      </Reveal>
     </main>
   );
 }

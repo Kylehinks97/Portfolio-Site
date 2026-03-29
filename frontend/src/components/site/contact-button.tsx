@@ -11,7 +11,7 @@ type ContactButtonProps = {
 
 export default function ContactButton({ locale, messages }: ContactButtonProps) {
     return (
-        <Button asChild size="lg" className="text-white!">
+        <Button asChild>
             <Link href={`/${locale}/contact`}>
                 {messages.nav.contact}
                 <Mail className="size-4" />
